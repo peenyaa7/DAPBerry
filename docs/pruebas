@@ -1,0 +1,244 @@
+Array (
+    [count] => 1
+    [0] => Array (
+        [sn] => Array (
+            [count] => 1
+            [0] => Newton
+        ) [0] => sn
+        [objectclass] => Array (
+            [count] => 4
+            [0] => inetOrgPerson
+            [1] => organizationalPerson
+            [2] => person
+            [3] => top
+        ) [1] => objectclass
+        [uid] => Array (
+            [count] => 1
+            [0] => newton
+        ) [2] => uid
+        [mail] => Array (
+            [count] => 1
+            [0] => newton@ldap.forumsys.com
+        ) [3] => mail
+        [cn] => Array (
+            [count] => 1
+            [0] => Isaac Newton
+        ) [4] => cn
+        [count] => 5
+        [dn] => uid=newton,dc=example,dc=com
+    ) 
+)
+
+-----------------------------------
+
+Array (
+    [count] => 16
+    [0] => Array (
+        [sn] => Array (
+            [count] => 1 [0] => Newton
+        )
+        [0] => sn [objectclass] => Array (
+            [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top
+        )
+        [1] => objectclass [uid] => Array (
+            [count] => 1 [0] => newton
+        ) [2] => uid [mail] => Array (
+            [count] => 1 [0] => newton@ldap.forumsys.com
+        ) [3] => mail [cn] => Array (
+            [count] => 1 [0] => Isaac Newton
+        ) [4] => cn [count] => 5 [dn] => uid=newton,dc=example,dc=com
+    )
+    [1] => Array (
+        [objectclass] => Array (
+            [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top
+        )
+        [0] => objectclass [cn] => Array (
+            [count] => 1 [0] => Albert Einstein
+        )
+        [1] => cn [sn] => Array ( [count] => 1 [0] => Einstein ) [2] => sn [uid] => Array ( [count] => 1 [0] => einstein ) [3] => uid [mail] => Array ( [count] => 1 [0] => einstein@ldap.forumsys.com ) [4] => mail [telephonenumber] => Array ( [count] => 1 [0] => 314-159-2653 ) [5] => telephonenumber [count] => 6 [dn] => uid=einstein,dc=example,dc=com
+    )
+    [2] => Array (
+        [objectclass] => Array (
+            [count] => 5 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top [4] => posixAccount ) [0] => objectclass [cn] => Array ( [count] => 1 [0] => Nikola Tesla ) [1] => cn [sn] => Array ( [count] => 1 [0] => Tesla ) [2] => sn [uid] => Array ( [count] => 1 [0] => tesla ) [3] => uid [mail] => Array ( [count] => 1 [0] => tesla@ldap.forumsys.com ) [4] => mail [uidnumber] => Array ( [count] => 1 [0] => 88888 ) [5] => uidnumber [gidnumber] => Array ( [count] => 1 [0] => 99999 ) [6] => gidnumber [homedirectory] => Array ( [count] => 1 [0] => home ) [7] => homedirectory [count] => 8 [dn] => uid=tesla,dc=example,dc=com
+    )
+    [3] => Array (
+        [objectclass] => Array (
+            [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [0] => objectclass [cn] => Array ( [count] => 1 [0] => Galileo Galilei ) [1] => cn [sn] => Array ( [count] => 1 [0] => Galilei ) [2] => sn [uid] => Array ( [count] => 1 [0] => galieleo ) [3] => uid [mail] => Array ( [count] => 1 [0] => galieleo@ldap.forumsys.com ) [4] => mail [count] => 5 [dn] => uid=galieleo,dc=example,dc=com
+    )
+    [4] => Array (
+        [objectclass] => Array (
+            [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [0] => objectclass [uid] => Array ( [count] => 1 [0] => euler ) [1] => uid [sn] => Array ( [count] => 1 [0] => Euler ) [2] => sn [cn] => Array ( [count] => 1 [0] => Leonhard Euler ) [3] => cn [mail] => Array ( [count] => 1 [0] => euler@ldap.forumsys.com ) [4] => mail [count] => 5 [dn] => uid=euler,dc=example,dc=com
+    )
+    [5] => Array (
+        [objectclass] => Array (
+            [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [0] => objectclass [cn] => Array ( [count] => 1 [0] => Carl Friedrich Gauss ) [1] => cn [sn] => Array ( [count] => 1 [0] => Gauss ) [2] => sn [uid] => Array ( [count] => 1 [0] => gauss ) [3] => uid [mail] => Array ( [count] => 1 [0] => gauss@ldap.forumsys.com ) [4] => mail [count] => 5 [dn] => uid=gauss,dc=example,dc=com
+    )
+    [6] => Array (
+        [objectclass] => Array (
+            [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [0] => objectclass [cn] => Array ( [count] => 1 [0] => Bernhard Riemann ) [1] => cn [sn] => Array ( [count] => 1 [0] => Riemann ) [2] => sn [uid] => Array ( [count] => 1 [0] => riemann ) [3] => uid [mail] => Array ( [count] => 1 [0] => riemann@ldap.forumsys.com ) [4] => mail [count] => 5 [dn] => uid=riemann,dc=example,dc=com
+    )
+    [7] => Array (
+        [uid] => Array (
+            [count] => 1 [0] => euclid ) [0] => uid [objectclass] => Array ( [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [1] => objectclass [cn] => Array ( [count] => 1 [0] => Euclid ) [2] => cn [sn] => Array ( [count] => 1 [0] => Euclid ) [3] => sn [mail] => Array ( [count] => 1 [0] => euclid@ldap.forumsys.com ) [4] => mail [count] => 5 [dn] => uid=euclid,dc=example,dc=com
+    )
+    [8] => Array (
+        [objectclass] => Array (
+            [count] => 3 [0] => posixAccount [1] => top [2] => inetOrgPerson ) [0] => objectclass [gidnumber] => Array ( [count] => 1 [0] => 0 ) [1] => gidnumber [givenname] => Array ( [count] => 1 [0] => Test ) [2] => givenname [sn] => Array ( [count] => 1 [0] => Test ) [3] => sn [displayname] => Array ( [count] => 1 [0] => Test ) [4] => displayname [uid] => Array ( [count] => 1 [0] => test ) [5] => uid [initials] => Array ( [count] => 1 [0] => TS ) [6] => initials [homedirectory] => Array ( [count] => 1 [0] => home ) [7] => homedirectory [cn] => Array ( [count] => 1 [0] => Test ) [8] => cn [uidnumber] => Array ( [count] => 1 [0] => 24601 ) [9] => uidnumber [o] => Array ( [count] => 1 [0] => Company ) [10] => o [count] => 11 [dn] => uid=test,dc=example,dc=com
+    )
+    [9] => Array (
+        [uid] => Array (
+            [count] => 1 [0] => curie ) [0] => uid [objectclass] => Array ( [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [1] => objectclass [cn] => Array ( [count] => 1 [0] => Marie Curie ) [2] => cn [sn] => Array ( [count] => 1 [0] => Curie ) [3] => sn [mail] => Array ( [count] => 1 [0] => curie@ldap.forumsys.com ) [4] => mail [count] => 5 [dn] => uid=curie,dc=example,dc=com
+    )
+    [10] => Array (
+        [uid] => Array (
+            [count] => 1 [0] => nobel ) [0] => uid [objectclass] => Array ( [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [1] => objectclass [mail] => Array ( [count] => 1 [0] => nobel@ldap.forumsys.com ) [2] => mail [sn] => Array ( [count] => 1 [0] => Nobel ) [3] => sn [cn] => Array ( [count] => 1 [0] => Alfred Nobel ) [4] => cn [count] => 5 [dn] => uid=nobel,dc=example,dc=com
+    )
+    [11] => Array (
+        [uid] => Array (
+            [count] => 1 [0] => boyle ) [0] => uid [objectclass] => Array ( [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [1] => objectclass [cn] => Array ( [count] => 1 [0] => Robert Boyle ) [2] => cn [sn] => Array ( [count] => 1 [0] => Boyle ) [3] => sn [mail] => Array ( [count] => 1 [0] => boyle@ldap.forumsys.com ) [4] => mail [telephonenumber] => Array ( [count] => 1 [0] => 999-867-5309 ) [5] => telephonenumber [count] => 6 [dn] => uid=boyle,dc=example,dc=com
+    )
+    [12] => Array (
+        [objectclass] => Array (
+            [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [0] => objectclass [sn] => Array ( [count] => 1 [0] => Pasteur ) [1] => sn [cn] => Array ( [count] => 1 [0] => Louis Pasteur ) [2] => cn [uid] => Array ( [count] => 1 [0] => pasteur ) [3] => uid [telephonenumber] => Array ( [count] => 1 [0] => 602-214-4978 ) [4] => telephonenumber [mail] => Array ( [count] => 1 [0] => pasteur@ldap.forumsys.com ) [5] => mail [count] => 6 [dn] => uid=pasteur,dc=example,dc=com
+    )
+    [13] => Array (
+        [uid] => Array (
+            [count] => 1 [0] => nogroup ) [0] => uid [objectclass] => Array ( [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [1] => objectclass [cn] => Array ( [count] => 1 [0] => No Group ) [2] => cn [mail] => Array ( [count] => 1 [0] => nogroup@ldap.forumsys.com ) [3] => mail [sn] => Array ( [count] => 1 [0] => Group ) [4] => sn [count] => 5 [dn] => uid=nogroup,dc=example,dc=com
+    )
+    [14] => Array (
+        [uid] => Array (
+            [count] => 1 [0] => training ) [0] => uid [objectclass] => Array ( [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [1] => objectclass [cn] => Array ( [count] => 1 [0] => FS Training ) [2] => cn [sn] => Array ( [count] => 1 [0] => training ) [3] => sn [mail] => Array ( [count] => 1 [0] => training@forumsys.com ) [4] => mail [telephonenumber] => Array ( [count] => 1 [0] => 888-111-2222 ) [5] => telephonenumber [count] => 6 [dn] => uid=training,dc=example,dc=com
+    )
+    [15] => Array (
+        [uid] => Array (
+            [count] => 1 [0] => jmacy ) [0] => uid [telephonenumber] => Array ( [count] => 1 [0] => 888-111-2222 ) [1] => telephonenumber [sn] => Array ( [count] => 1 [0] => training ) [2] => sn [cn] => Array ( [count] => 1 [0] => FS Training ) [3] => cn [objectclass] => Array ( [count] => 4 [0] => inetOrgPerson [1] => organizationalPerson [2] => person [3] => top ) [4] => objectclass [mail] => Array ( [count] => 1 [0] => jmacy-training@forumsys.com ) [5] => mail [count] => 6 [dn] => uid=jmacy,dc=example,dc=com )
+)
+
+-----------------------------------------
+
+Array (
+    [count] => 4 [0] => Array (
+        [uniquemember] => Array (
+            [count] => 5
+            [0] => uid=euclid,dc=example,dc=com
+            [1] => uid=riemann,dc=example,dc=com
+            [2] => uid=euler,dc=example,dc=com
+            [3] => uid=gauss,dc=example,dc=com
+            [4] => uid=test,dc=example,dc=com
+        ) [0] => uniquemember
+        [ou] => Array (
+            [count] => 1
+            [0] => mathematicians
+        ) [1] => ou
+        [cn] => Array (
+            [count] => 1
+            [0] => Mathematicians
+        ) [2] => cn
+        [objectclass] => Array (
+            [count] => 2
+            [0] => groupOfUniqueNames
+            [1] => top
+        ) [3] => objectclass
+        [count] => 4
+        [dn] => ou=mathematicians,dc=example,dc=com
+    )
+
+    [1] => Array (
+        [uniquemember] => Array (
+            [count] => 6 [0] => uid=einstein,dc=example,dc=com [1] => uid=galieleo,dc=example,dc=com [2] => uid=tesla,dc=example,dc=com [3] => uid=newton,dc=example,dc=com [4] => uid=training,dc=example,dc=com [5] => uid=jmacy,dc=example,dc=com ) [0] => uniquemember [ou] => Array ( [count] => 1 [0] => scientists ) [1] => ou [cn] => Array ( [count] => 1 [0] => Scientists ) [2] => cn [objectclass] => Array ( [count] => 2 [0] => groupOfUniqueNames [1] => top ) [3] => objectclass [count] => 4 [dn] => ou=scientists,dc=example,dc=com ) [2] => Array ( [uniquemember] => Array ( [count] => 1 [0] => uid=tesla,dc=example,dc=com ) [0] => uniquemember [ou] => Array ( [count] => 1 [0] => italians ) [1] => ou [cn] => Array ( [count] => 1 [0] => Italians ) [2] => cn [objectclass] => Array ( [count] => 2 [0] => groupOfUniqueNames [1] => top ) [3] => objectclass [count] => 4 [dn] => ou=italians,ou=scientists,dc=example,dc=com ) [3] => Array ( [ou] => Array ( [count] => 1 [0] => chemists ) [0] => ou [objectclass] => Array ( [count] => 2 [0] => groupOfUniqueNames [1] => top ) [1] => objectclass [uniquemember] => Array ( [count] => 4 [0] => uid=curie,dc=example,dc=com [1] => uid=boyle,dc=example,dc=com [2] => uid=nobel,dc=example,dc=com [3] => uid=pasteur,dc=example,dc=com ) [2] => uniquemember [cn] => Array ( [count] => 1 [0] => Chemists ) [3] => cn [count] => 4 [dn] => ou=chemists,dc=example,dc=com ) )
+
+---------------------------
+Esto es lo que suelta una entrada hecha por mi
+
+Array (
+    [count] => 1
+    [0] => Array (
+        [objectclass] => Array (
+            [count] => 4
+            [0] => posixAccount
+            [1] => shadowAccount
+            [2] => account
+            [3] => top
+        )
+        [0] => objectclass
+
+        [uid] => Array (
+            [count] => 1
+            [0] => usuario
+        )
+        [1] => uid
+
+        [cn] => Array (
+            [count] => 1
+            [0] => nombreusuario apellidousuario
+        )
+        [2] => cn
+
+        [gecos] => Array (
+            [count] => 1
+            [0] => nombreusuario apellidousuario
+        )
+        [3] => gecos
+
+        [homedirectory] => Array (
+            [count] => 1
+            [0] => /home/usuario
+        )
+        [4] => homedirectory
+
+        [uidnumber] => Array (
+            [count] => 1
+            [0] => 6001
+        )
+        [5] => uidnumber
+
+        [gidnumber] => Array (
+            [count] => 1
+            [0] => 20001
+        )
+        [6] => gidnumber
+
+        [loginshell] => Array (
+            [count] => 1
+            [0] => /bin/bash
+        )
+        [7] => loginshell
+
+        [shadowexpire] => Array (
+            [count] => 1
+            [0] => -1
+        )
+        [8] => shadowexpire
+
+        [shadowlastchange] => Array (
+            [count] => 1
+            [0] => 16431
+        )
+        [9] => shadowlastchange
+
+        [shadowmax] => Array (
+            [count] => 1
+            [0] => 999999
+        )
+        [10] => shadowmax
+
+        [shadowmin] => Array (
+            [count] => 1
+            [0] => 0
+        )
+        [11] => shadowmin
+
+        [shadowwarning] => Array (
+            [count] => 1
+            [0] => 7
+        )
+        [12] => shadowwarning
+
+        [count] => 13
+
+        [dn] => uid=usuario,dc=francisco,dc=com
+    )
+)
+
+---------------------------------------------
+<ul></ul>

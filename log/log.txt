@@ -1,0 +1,12 @@
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+"--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
+Ouuuu yeeeeaaah

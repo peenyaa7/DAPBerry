@@ -1,0 +1,180 @@
+/* CSS DE UTILIDAD -> GENERICO (Por clases) */
+
+@font-face {
+    font-family: "sf-ui-display";
+    src: url('../fonts/SF-UI-Display-Regular.eot');
+    src: url('../fonts/SF-UI-Display-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/SF-UI-Display-Regular.svg#SF UI Display') format('svg'),
+        url('../fonts/SF-UI-Display-Regular.woff') format('woff'),
+        url('../fonts/SF-UI-Display-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#main {
+    margin: 0 0.5%;
+}
+
+.material-icons {
+    vertical-align: middle;
+}
+
+* {
+    font-family: "sf-ui-display";
+    /*border: 1px red solid;*/
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+div.clear {
+    clear: both;
+}
+
+.horizontalHole {
+    height: 0.8em;
+}
+
+.verticalHole {
+    width: 0.8em;
+}
+
+.normalElement {
+    padding: 0.4em 0.0em 0.0em 0.4em;
+}
+
+.rigthElement {
+    padding: 0.4em 0.4em 0.0em 0.4em;
+}
+
+.downElement {
+    padding: 0.4em;
+    
+}
+
+hr.linea {
+    width: 97%;
+}
+
+.obligatorio {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.treeLDAP {
+    overflow:auto;
+    border:1px solid silver;
+    min-height:100px;
+}
+
+.icon {
+    width: 40%;
+}
+
+.centrar-texto {
+    text-align: center;
+}
+
+div.textoUsuario {
+    height: 35%;
+    text-align: center;
+    color: white;
+}
+
+
+.formAgregar {
+    width: 100%;
+}
+
+.formAgregar td:first-child {
+    text-align: left;
+}
+
+.formAgregar td:last-child {
+    text-align: right;
+}
+
+/*.formAgregar tr:hover {
+    background-color: #f2f2f2;
+}*/
+
+
+
+
+.rejilla {
+    text-align: left;
+    line-height: 40px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid #007fff;
+    width: 100%;
+    margin: 0px auto;
+    border-radius: .25rem;
+}
+
+.rejilla thead tr:first-child {
+    background: #007fff;
+    color: #fff;
+    border: none;
+}
+
+.rejilla thead tr:last-child th {
+    border-bottom: 3px solid #ddd;
+}
+
+.rejilla th:first-child {
+    cursor: pointer;
+}
+
+.rejilla th:first-child, .rejilla td:first-child {
+    padding: 0 15px 0 20px;
+}
+
+.rejilla tbody tr:hover {
+    background-color: #f2f2f2;
+    cursor: default;
+}
+
+.rejilla tbody tr:last-child td {
+    border: none;
+}
+
+.rejilla tbody td {
+    border-bottom: 1px solid #ddd;
+}
+
+.rejilla td:last-child {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.rejilla .button {
+  color: #aaa;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+
+.rejilla .edit:hover, .rejilla .delete:hover, .rejilla .info:hover {
+  color: #0a79df;
+}
+
+
+
+
+
+
+
+span.destacarspan {
+    color: red;
+    font-weight: bold;
+}
+
+/*
+verde pastel -> #d4edda
+azul pastel -> #d1ecf1
+amarillo pastel -> #fff3cd
+rojo pastel -> #f8d7da
+*/

@@ -1,0 +1,595 @@
+{
+    "objectClasses": [
+        { 
+            "NAME": ["top"],
+            "DESC": "top of the superclass chain",
+            "SUP": "",
+            "TYPE": "ABSTRACT",
+            "MUST": ["objectClass"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["extensibleObject"],
+            "DESC": "RFC4512: extensible object",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["alias"],
+            "DESC": "RFC4512: an alias",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["aliasedObjectName"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["referral"],
+            "DESC": "namedref: named subordinate referral",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["ref"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["OpenLDAProotDSE","LDAProotDSE"],
+            "DESC": "OpenLDAP Root DSE object",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["cn"]
+        },
+        {
+            "NAME": ["subentry"],
+            "DESC": "RFC3672: subentry",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn","subtreeSpecification"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["subschema"],
+            "DESC": "RFC4512: controlling subschema subentry",
+            "SUP": "",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["dITStructureRules","nameForms","dITContentRules","objectClasses","attributeTypes","matchingRules","matchingRuleUse"]
+        },
+        {
+            "NAME": ["dynamicObject"],
+            "DESC": "RFC2589: Dynamic Object",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": [""]
+        },
+        { 
+            "NAME": ["olcConfig"],
+            "DESC": "OpenLDAP configuration object",
+            "SUP": "top",
+            "TYPE": "ABSTRACT",
+            "MUST": [""],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["olcGlobal"],
+            "DESC": "OpenLDAP Global configuration options",
+            "SUP": "olcConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["cn","olcConfigFile","olcConfigDir","olcAllows","olcArgsFile","olcAttributeOptions","olcAuthIDRewrite","olcAuthzPolicy","olcAuthzRegexp","olcConcurrency","olcConnMaxPending","olcConnMaxPendingAuth","olcDisallows","olcGentleHUP","olcIdleTimeout","olcIndexSubstrIfMaxLen",
+                    "olcIndexSubstrIfMinLen","olcIndexSubstrAnyLen","olcIndexSubstrAnyStep","olcIndexIntLen","olcListenerThreads","olcLocalSSF","olcLogFile","olcLogLevel","olcPasswordCryptSaltFormat","olcPasswordHash","olcPidFile","olcPluginLogFile","olcReadOnly","olcReferral","olcReplogFile",
+                    "olcRequires","olcRestrict","olcReverseLookup","olcRootDSE","olcSaslAuxprops","olcSaslHost","olcSaslRealm","olcSaslSecProps","olcSecurity","olcServerID","olcSizeLimit","olcSockbufMaxIncoming","olcSockbufMaxIncomingAuth","olcTCPBuffer","olcThreads","olcTimeLimit",
+                    "olcTLSCACertificateFile","olcTLSCACertificatePath","olcTLSCertificateFile","olcTLSCertificateKeyFile","olcTLSCipherSuite","olcTLSCRLCheck","olcTLSRandFile","olcTLSVerifyClient","olcTLSDHParamFile","olcTLSCRLFile","olcTLSProtocolMin","olcToolThreads","olcWriteTimeout",
+                    "olcObjectIdentifier","olcAttributeTypes","olcObjectClasses","olcDitContentRules","olcLdapSyntaxes"]
+        },
+        {
+            "NAME": ["olcSchemaConfig"],
+            "DESC": "OpenLDAP schema object",
+            "SUP": "olcConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["cn","olcObjectIdentifier","olcLdapSyntaxes","olcAttributeTypes","olcObjectClasses","olcDitContentRules"]
+        },
+        {
+            "NAME": ["olcBackendConfig"],
+            "DESC": "OpenLDAP Backend-specific options",
+            "SUP": "olcConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["olcBackend"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["olcDatabaseConfig"],
+            "DESC": "OpenLDAP Database-specific options",
+            "SUP": "olcConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["olcDatabase"],
+            "MAY": ["olcHidden","olcSuffix","olcSubordinate","olcAccess","olcAddContentAcl","olcLastMod","olcLimits","olcMaxDerefDepth","olcPlugin","olcReadOnly","olcReplica","olcReplicaArgsFile","olcReplicaPidFile","olcReplicationInterval","olcReplogFile","olcRequires","olcRestrict",
+                    "olcRootDN","olcRootPW","olcSchemaDN","olcSecurity","olcSizeLimit","olcSyncUseSubentry","olcSyncrepl","olcTimeLimit","olcUpdateDN","olcUpdateRef","olcMirrorMode","olcMonitoring","olcExtraAttrs"]
+        },
+        {
+            "NAME": ["olcOverlayConfig"],
+            "DESC": "OpenLDAP Overlay-specific options",
+            "SUP": "olcConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["olcOverlay"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["olcIncludeFile"],
+            "DESC": "OpenLDAP configuration include file",
+            "SUP": "olcConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["olcInclude"],
+            "MAY": ["cn","olcRootDSE"]
+        },
+        {
+            "NAME": ["olcFrontendConfig"],
+            "DESC": "OpenLDAP frontend configuration",
+            "SUP": "",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["olcDefaultSearchBase","olcPasswordHash","olcSortVals"]
+        },
+        {
+            "NAME": ["olcModuleList"],
+            "DESC": "OpenLDAP dynamic module info",
+            "SUP": "olcConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["cn","olcModulePath","olcModuleLoad"]
+        },
+        {
+            "NAME": ["olcLdifConfig"],
+            "DESC": "LDIF backend configuration",
+            "SUP": "olcDatabaseConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["olcDbDirectory"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["olcMdbConfig"],
+            "DESC": "MDB backend configuration",
+            "SUP": "olcDatabaseConfig",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["olcDbDirectory"],
+            "MAY": ["olcDbCheckpoint","olcDbEnvFlags","olcDbNoSync","olcDbIndex","olcDbMaxReaders","olcDbMaxSize","olcDbMode","olcDbSearchStack"]
+        },
+        {
+            "NAME": ["country"],
+            "DESC": "RFC2256: a country",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["c"],
+            "MAY": ["searchGuide","description"]
+        },
+        {
+            "NAME": ["locality"],
+            "DESC": "RFC2256: a locality",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["street","seeAlso","searchGuide","st","l","description"]
+        },
+        {
+            "NAME": ["organization"],
+            "DESC": "RFC2256: an organization",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["o"],
+            "MAY": ["userPassword","searchGuide","seeAlso","businessCategory","x121Address","registeredAddress","destinationIndicator","preferredDeliveryMethod","telexNumber","teletexTerminalIdentifier","telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street","postOfficeBox","postalCode","postalAddress","physicalDeliveryOfficeName","st","l","description"]
+        },
+        {
+            "NAME": ["organizationalUnit"],
+            "DESC": "RFC2256: an organizational unit",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["ou"],
+            "MAY": ["userPassword","searchGuide","seeAlso","businessCategory","x121Address","registeredAddress","destinationIndicator","preferredDeliveryMethod","telexNumber","teletexTerminalIdentifier","telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street","postOfficeBox","postalCode","postalAddress","physicalDeliveryOfficeName","st","l","description"]
+        },
+        {
+            "NAME": ["person"],
+            "DESC": "RFC2256: a person",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["sn","cn"],
+            "MAY": ["userPassword","telephoneNumber","seeAlso","description"]
+        },
+        {
+            "NAME": ["organizationalPerson"],
+            "DESC": "RFC2256: an organizational person",
+            "SUP": "person",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["title","x121Address","registeredAddress","destinationIndicator","preferredDeliveryMethod","telexNumber","teletexTerminalIdentifier","telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street","postOfficeBox","postalCode","postalAddress","physicalDeliveryOfficeName","ou","st","l"]
+        },
+        {
+            "NAME": ["organizationalRole"],
+            "DESC": "RFC2256: an organizational role",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn"],
+            "MAY": ["x121Address","registeredAddress","destinationIndicator","preferredDeliveryMethod","telexNumber","teletexTerminalIdentifier","telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","seeAlso","roleOccupant","preferredDeliveryMethod","street","postOfficeBox","postalCode","postalAddress","physicalDeliveryOfficeName","ou","st","l","description"]
+        },
+        {
+            "NAME": ["groupOfNames"],
+            "DESC": "RFC2256: a group of names DNs",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["member","cn"],
+            "MAY": ["businessCategory","seeAlso","owner","ou","o","description"]
+        },
+        {
+            "NAME": ["residentialPerson"],
+            "DESC": "RFC2256: an residential person",
+            "SUP": "person",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["l"],
+            "MAY": ["businessCategory","x121Address","registeredAddress","destinationIndicator","preferredDeliveryMethod","telexNumber","teletexTerminalIdentifier","telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","preferredDeliveryMethod","street","postOfficeBox","postalCode","postalAddress","physicalDeliveryOfficeName","st","l"]
+        },
+        {
+            "NAME": ["applicationProcess"],
+            "DESC": "RFC2256: an application process",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn"],
+            "MAY": ["seeAlso","ou","l","description"]
+        },
+        {
+            "NAME": ["applicationEntity"],
+            "DESC": "RFC2256: an application entity",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["presentationAddress","cn"],
+            "MAY": ["supportedApplicationContext","seeAlso","ou","o","l","description"]
+        },
+        {
+            "NAME": ["dSA"],
+            "DESC": "RFC2256: a directory system agent a server",
+            "SUP": "applicationEntity",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["knowledgeInformation"]
+        },
+        {
+            "NAME": ["device"],
+            "DESC": "RFC2256: a device",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn"],
+            "MAY": ["serialNumber","seeAlso","owner","ou","o","l","description"]
+        },
+        {
+            "NAME": ["strongAuthenticationUser"],
+            "DESC": "RFC2256: a strong authentication user",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["userCertificate"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["certificationAuthority"],
+            "DESC": "RFC2256: a certificate authority",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["authorityRevocationList","certificateRevocationList","cACertificate"],
+            "MAY": ["crossCertificatePair"]
+        },
+        {
+            "NAME": ["groupOfUniqueNames"],
+            "DESC": "RFC2256: a group of unique names DN and Unique Identifier",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["uniqueMember","cn"],
+            "MAY": ["businessCategory","seeAlso","owner","ou","o","description"]
+        },
+        {
+            "NAME": ["userSecurityInformation"],
+            "DESC": "RFC2256: a user security information",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["supportedAlgorithms"]
+        },
+        {
+            "NAME": ["certificationAuthority-V2"],
+            "DESC": "",
+            "SUP": "certificationAuthority",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["deltaRevocationList"]
+        },
+        {
+            "NAME": ["cRLDistributionPoint"],
+            "DESC": "",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn"],
+            "MAY": ["certificateRevocationList","authorityRevocationList","deltaRevocationList"]
+        },
+        {
+            "NAME": ["dmd"],
+            "DESC": "",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["dmdName"],
+            "MAY": ["userPassword","searchGuide","seeAlso","businessCategory","x121Address","registeredAddress","destinationIndicator","preferredDeliveryMethod","telexNumber","teletexTerminalIdentifier","telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street","postOfficeBox","postalCode","postalAddress","physicalDeliveryOfficeName","st","l","description"]
+        },
+        {
+            "NAME": ["pkiUser"],
+            "DESC": "RFC2587: a PKI user",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["userCertificate"]
+        },
+        {
+            "NAME": ["pkiCA"],
+            "DESC": "RFC2587: PKI certificate authority",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["authorityRevocationList","certificateRevocationList","cACertificate","crossCertificatePair"]
+        },
+        {
+            "NAME": ["deltaCRL"],
+            "DESC": "RFC2587: PKI user",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["deltaRevocationList"]
+        },
+        {
+            "NAME": ["labeledURIObject"],
+            "DESC": "RFC2079: object that contains the URI attribute type",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["labeledURI"]
+        },
+        {
+            "NAME": ["simpleSecurityObject"],
+            "DESC": "RFC1274: simple security object",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["userPassword"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["dcObject"],
+            "DESC": "RFC2247: domain component object",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["dc"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["uidObject"],
+            "DESC": "RFC2377: uid object",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["uid"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["pilotPerson","newPilotPerson"],
+            "DESC": "",
+            "SUP": "person",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["userid","textEncodedORAddress","rfc822Mailbox","favouriteDrink","roomNumber","userClass","homeTelephoneNumber","homePostalAddress","secretary","personalTitle","preferredDeliveryMethod","businessCategory","janetMailbox","otherMailbox","mobileTelephoneNumber","pagerTelephoneNumber","organizationalStatus","mailPreferenceOption","personalSignature"]
+        },
+        {
+            "NAME": ["account"],
+            "DESC": "",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["userid"],
+            "MAY": ["description","seeAlso","localityName","organizationName","organizationalUnitName","host"]
+        },
+        {
+            "NAME": ["document"],
+            "DESC": "",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["documentIdentifier"],
+            "MAY": ["commonName","description","seeAlso","localityName","organizationName","organizationalUnitName","documentTitle","documentVersion","documentAuthor","documentLocation","documentPublisher"]
+        },
+        {
+            "NAME": ["room"],
+            "DESC": "",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["commonName"],
+            "MAY": ["roomNumber","description","seeAlso","telephoneNumber"]
+        },
+        {
+            "NAME": ["documentSeries"],
+            "DESC": "",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["commonName"],
+            "MAY": ["description","seeAlso","telephonenumber","localityName","organizationName","organizationalUnitName"]
+        },
+        {
+            "NAME": ["domain"],
+            "DESC": "",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["domainComponent"],
+            "MAY": ["associatedName","organizationName","description","businessCategory","seeAlso","searchGuide","userPassword","localityName","stateOrProvinceName","streetAddress","physicalDeliveryOfficeName","postalAddress","postalCode","postOfficeBox","streetAddress","facsimileTelephoneNumber","internationalISDNNumber","telephoneNumber","teletexTerminalIdentifier","telexNumber","preferredDeliveryMethod","destinationIndicator","registeredAddress","x121Address"]
+        },
+        {
+            "NAME": ["RFC822localPart"],
+            "DESC": "",
+            "SUP": "domain",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["commonName","surname","description","seeAlso","telephoneNumber","physicalDeliveryOfficeName","postalAddress","postalCode","postOfficeBox","streetAddress","facsimileTelephoneNumber","internationalISDNNumber","telephoneNumber","teletexTerminalIdentifier","telexNumber","preferredDeliveryMethod","destinationIndicator","registeredAddress","x121Address"]
+        },
+        {
+            "NAME": ["dNSDomain"],
+            "DESC": "",
+            "SUP": "domain",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["ARecord","MDRecord","MXRecord","NSRecord","SOARecord","CNAMERecord"]
+        },
+        {
+            "NAME": ["domainRelatedObject"],
+            "DESC": "RFC1274: an object related to an domain",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["associatedDomain"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["friendlyCountry"],
+            "DESC": "",
+            "SUP": "country",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["friendlyCountryName"],
+            "MAY": [""]
+        },
+        {
+            "NAME": ["pilotOrganization"],
+            "DESC": "",
+            "SUP": ["organization","organizationalUnit"],
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["buildingName"]
+        },
+        {
+            "NAME": ["pilotDSA"],
+            "DESC": "",
+            "SUP": "dsa",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["dSAQuality"]
+        },
+        {
+            "NAME": ["qualityLabelledData"],
+            "DESC": "",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["dsaQuality"],
+            "MAY": ["subtreeMinimumQuality","subtreeMaximumQuality"]
+        },
+        {
+            "NAME": ["posixAccount"],
+            "DESC": "Abstraction of an account with POSIX attributes",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["cn","uid","uidNumber","gidNumber","homeDirectory"],
+            "MAY": ["userPassword","loginShell","gecos","description"]
+        },
+        {
+            "NAME": ["shadowAccount"],
+            "DESC": "Additional attributes for shadow passwords",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["uid"],
+            "MAY": ["userPassword","shadowLastChange","shadowMin","shadowMax","shadowWarning","shadowInactive","shadowExpire","shadowFlag","description"]
+        },
+        {
+            "NAME": ["posixGroup"],
+            "DESC": "Abstraction of a group of accounts",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn","gidNumber"],
+            "MAY": ["userPassword","memberUid","description"]
+        },
+        {
+            "NAME": ["ipService"],
+            "DESC": "Abstraction an Internet Protocol service",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn","ipServicePort","ipServiceProtocol"],
+            "MAY": ["description"]
+        },
+        {
+            "NAME": ["ipProtocol"],
+            "DESC": "Abstraction of an IP protocol",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn","ipProtocolNumber","description"],
+            "MAY": ["description"]
+        },
+        {
+            "NAME": ["oncRpc"],
+            "DESC": "Abstraction of an ONC/RPC binding",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn","oncRpcNumber","description"],
+            "MAY": ["description"]
+        },
+        {
+            "NAME": ["ipHost"],
+            "DESC": "Abstraction of a host, an IP device",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": ["cn","ipHostNumber"],
+            "MAY": ["l","description","manager"]
+        },
+        {
+            "NAME": ["ipNetwork"],
+            "DESC": "Abstraction of an IP network",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn","ipNetworkNumber"],
+            "MAY": ["ipNetmaskNumber","l","description","manager"]
+        },
+        {
+            "NAME": ["nisNetgroup"],
+            "DESC": "Abstraction of a netgroup",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn"],
+            "MAY": ["nisNetgroupTriple","memberNisNetgroup","description"]
+        },
+        {
+            "NAME": ["nisMap"],
+            "DESC": "A generic abstraction of a NIS map",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["nisMapName"],
+            "MAY": ["description"]
+        },
+        {
+            "NAME": ["nisObject"],
+            "DESC": "An entry in a NIS map",
+            "SUP": "top",
+            "TYPE": "STRUCTURAL",
+            "MUST": ["cn","nisMapEntry","nisMapName"],
+            "MAY": ["description"]
+        },
+        {
+            "NAME": ["ieee802Device"],
+            "DESC": "A device with a MAC address",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["macAddress"]
+        },
+        {
+            "NAME": ["bootableDevice"],
+            "DESC": "A device with boot parameters",
+            "SUP": "top",
+            "TYPE": "AUXILIARY",
+            "MUST": [""],
+            "MAY": ["bootFile","bootParameter"]
+        },
+        {
+            "NAME": ["inetOrgPerson"],
+            "DESC": "RFC2798: Internet Organizational Person",
+            "SUP": "organizationalPerson",
+            "TYPE": "STRUCTURAL",
+            "MUST": [""],
+            "MAY": ["audio","businessCategory","carLicense","departmentNumber","displayName","employeeNumber","employeeType","givenName","homePhone","homePostalAddress","initials","jpegPhoto","labeledURI","mail","manager","mobile","o","pager","photo","roomNumber","secretary","uid","userCertificate","x500uniqueIdentifier","preferredLanguage","userSMIMECertificate","userPKCS12"]
+        }
+    ]
+}
+
+

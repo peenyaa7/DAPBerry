@@ -1,0 +1,23 @@
+[
+        {
+            "servidor": "ldap.forumsys.com",
+            "dominio": "example.com",
+            "usuario": "read-only-admin",
+            "clave": "password"
+        }, {
+            "servidor": "www.zflexldap.com",
+            "dominio": "zflexsoftware.com",
+            "usuario": "ro_admin.sysadmins",
+            "clave": "zflexpass"
+        }, {
+            "servidor": "192.168.5.41",
+            "dominio": "francisco.com",
+            "usuario": "admin",
+            "clave": ""
+        }, {
+            "servidor": "172.17.23.159",
+            "dominio": "francisco.com",
+            "usuario": "admin",
+            "clave": "velocidad123"
+        }
+    ]

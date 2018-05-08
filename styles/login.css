@@ -1,0 +1,21 @@
+* {
+    /*border: 1px red solid;*/
+}
+
+body {
+    /*background: url('../images/wallpapers/login-wallpaper.jpg');*/
+}
+
+div.fondoLogin {
+    margin-top: 10%;
+    margin-right: 3%;
+    margin-left: 3%;
+    padding: 5%;
+    border-radius: 15px;
+    background: url('../images/wallpapers/identification-wallpaper.jpg');;
+}
+
+span#leyendaUsuario, span#leyendaDominio {
+    font-weight: bold;
+    color: red;
+}
