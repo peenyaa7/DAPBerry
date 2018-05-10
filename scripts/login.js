@@ -3,6 +3,10 @@ $(login);
 function login() {
     asignarEventos();
     cargarServidores();
+    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+    particlesJS.load('particles-js', 'scripts/particles/particles.json', function () {
+        console.log('callback - particles.js config loaded');
+    });
 }
 
 function asignarEventos() {
@@ -69,13 +73,13 @@ function cargarServidores() {
             var fila = document.createElement("tr");
             var contenidoBoton = document.createTextNode("Usar!");
             var boton = document.createElement("button");
-            boton.setAttribute("onclick","seleccionarServidor(this)");
+            boton.setAttribute("onclick", "seleccionarServidor(this)");
             boton.appendChild(contenidoBoton);
             fila.appendChild(boton);
             $.each(servidor, function (atributo, valor) {
                 var celda = document.createElement("td");
                 var contenido = document.createTextNode(valor);
-                boton.setAttribute(atributo,valor);
+                boton.setAttribute(atributo, valor);
                 celda.appendChild(contenido);
                 fila.appendChild(celda);
             });

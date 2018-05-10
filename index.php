@@ -6,74 +6,121 @@ $_SESSION["cn"] = "";
 $_SESSION["basedn"] = "";
 $_SESSION["clave"] = "";
 ?>
-<html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
         <title>Identificacion</title>
-        <link rel="icon" type="image/png" href="images/favicon.png"/>
-        <!-- Scripts -->
-        <script src="scripts/jquery/jquery-3.3.1.js" type="text/javascript"></script>
-        <script src="scripts/jquery/jqueryui/jquery-ui.js" type="text/javascript"></script>
-        <script src="scripts/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-        <script src="scripts/login.js" type="text/javascript"></script>
-        <!-- Styles -->
-        <link href="scripts/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="styles/login.css" rel="stylesheet" type="text/css"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="images/Logo.png"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="scripts/bootstrap/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="styles/animate/animate.css">
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="styles/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="scripts/select2/select2.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="styles/login-util.css">
+        <link rel="stylesheet" type="text/css" href="styles/login-main.css">
+        <!--===============================================================================================-->
     </head>
-    <body id="particles-js">
-        <!--<div>-->
-        <div class="row">
-            <div class="col-lg-6">
-                <div id="identificacion" class="fondoLogin">
-                    <h1>Identificación</h1>
-                    <form action="php/controlador.php">
-                        <div class="form-group">
-                            <label for="servidor">Servidor: </label>
-                            <input type="text" class="form-control" id="servidor" name="servidor" placeholder="192.168.5.40/ldap.forumsys.com"/>
+    <body>
+
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <div class="login100-pic js-tilt" data-tilt>
+                        <img src="images/Logo.png" alt="IMG">
+                    </div>
+
+                    <form class="login100-form validate-form" action="php/controlador.php">
+                        <span class="login100-form-title">
+                            DAPBerry
+                        </span>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Es necesario validar el servidor: 172.17.23.218/www.dapberry.com">
+                            <input class="input100" type="text" name="servidor" placeholder="Servidor">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-server" aria-hidden="true"></i>
+                            </span>
                         </div>
-                        <hr>
-                        <label for="usuario">Usuario: <span id="leyendaUsuario"></span><span id="leyendaDominio"></span></label>
-                        <div class="form-inline">
-                            <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Admin user"/>
-                            <span> @ </span>
-                            <input type="text" class="form-control" id="dominio" name="dominio" placeholder="Domain.com"/>
+                        
+                        <div class="wrap-input100 validate-input" data-validate = "Hay que especificar un usuario: admin">
+                            <input class="input100" type="text" name="usuario" placeholder="Usuario">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
                         </div>
-                        <hr>
-                        <div class="form-group">
-                            <label for="clave">Contraseña: </label>
-                            <input type="password" class="form-control" id="clave" name="clave" placeholder="password">
+
+                        <div class="wrap-input100 validate-input" data-validate = "Debes pertenecer a un dominio: example.com">
+                            <input class="input100" type="text" name="dominio" placeholder="Dominio">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-code-fork" aria-hidden="true"></i>
+                            </span>
                         </div>
-                        <hr>
-                        <div class="checkbox">
-                            <label><input type="checkbox"> Recordar</label>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Es necesaria una contraseña">
+                            <input class="input100" type="password" name="clave" placeholder="Clave">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </span>
                         </div>
-                        <input type="submit" name="accion" value="Acceder" class="btn btn-success"/>
-                        <input type="submit" name="accion" value="Registrarse (implementar)" class="btn btn-danger"/>
-                        <button class="btn btn-info">?</button>
+                        
+                        <input type="hidden" name="accion" value="acceder">
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+
+<!--                        <div class="text-center p-t-12">
+                            <span class="txt1">
+                                Forgot
+                            </span>
+                            <a class="txt2" href="#">
+                                Username / Password?
+                            </a>
+                        </div>-->
+
+<!--                        <div class="text-center p-t-136">
+                            <a class="txt2" href="#">
+                                Create your Account
+                                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                            </a>
+                        </div>-->
                     </form>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="fondoLogin">
-                    <h1>Lista de Servidores</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Servidor</th>
-                                <th>Dominio</th>
-                                <th>Usuario</th>
-                                <th>Contraseña</th>
-                            </tr>
-                        </thead>
-                        <tbody id="servidores"></tbody>
-                    </table>
-                </div>
-            </div>
         </div>
-        
-        <script src="scripts/particles/demo/js/app.js" type="text/javascript"></script>
-        <script src="scripts/particles/particles.js" type="text/javascript"></script>
-        <!--</div>-->
+
+
+
+
+        <!--===============================================================================================-->	
+        <script src="scripts/jquery/jquery-3.3.1.js"></script>
+        <!--===============================================================================================-->
+        <script src="scripts/popper/popper.js"></script>
+        <script src="scripts/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="scripts/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="scripts/tilt/tilt.jquery.min.js"></script>
+        <script >
+            $('.js-tilt').tilt({
+                scale: 1.1
+            })
+        </script>
+        <!--===============================================================================================-->
+        <script src="scripts/login-main.js"></script>
+
     </body>
 </html>
