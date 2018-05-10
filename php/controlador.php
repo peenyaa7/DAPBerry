@@ -225,10 +225,14 @@ if (isset($_REQUEST["accion"]))
             }
             ldap_close($conexion);
             break;
+        case "ajaxobtenerlistaservidores":
+            AJAXObtenerListaServidores();
+            break;
         case "obtenerlog":
             obtenerLOG();
             break;
         case "borrarlog":
+            escribirLog("Borrado del log", "Info");
             borrarLOG();
             break;
         default:

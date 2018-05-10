@@ -1,6 +1,4 @@
 <?php
-
-
 /* FUNCIONES AJAX */
 
 function AJAXInformacionEntrada($conexion, $ruta) {
@@ -116,7 +114,7 @@ function AJAXInformacionAplicacion() {
         </tr>
         <tr>
             <td colspan="2"><p>Este gestor de LDAP llamado 'DAPBerry' está diseñado con el objetivo de que el usuario pueda
-        utilizarlo de forma intuitiva y dinámica gracias a su integracion con AJAX y la interfaz user-friendly que tiene.</p></td>
+                    utilizarlo de forma intuitiva y dinámica gracias a su integracion con AJAX y la interfaz user-friendly que tiene.</p></td>
         </tr>
         <tr>
             <th>Actualizada</th>
@@ -150,6 +148,43 @@ function AJAXInformacionAplicacion() {
             <th>Contacto</th>
             <td>peenyaa7@gmail.com</td>
         </tr>
+    </table>
+    <?php
+}
+
+function AJAXObtenerListaServidores() {
+    ?>
+    <table class="rejilla">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Servidor</th>
+                <th>Dominio</th>
+                <th>Usuario</th>
+                <th>Clave</th>
+            </tr>
+        </thead>
+        <tbody id="servidores">
+            <?php
+            $contenido = file_get_contents("../json/servers.json");
+            $json = json_decode($contenido, true);
+            foreach ($json as $key => $value) {
+                ?>
+                <tr>
+                    <td><button class='btn btn-success' style='width: 100%;' onclick='usarServidor(this);' servidor="<?php echo $value["servidor"]; ?>"
+                                                                                                           dominio="<?php echo $value["dominio"]; ?>"
+                                                                                                           usuario="<?php echo $value["usuario"]; ?>"
+                                                                                                           clave="<?php echo $value["clave"]; ?>"
+                                                                                                           >Usar!</button></td>
+                    <td><?php echo $value["servidor"]; ?></td>
+                    <td><?php echo $value["dominio"]; ?></td>
+                    <td><?php echo $value["usuario"]; ?></td>
+                    <td><?php echo $value["clave"]; ?></td>
+                </tr>
+                <?php
+            }
+            ?>
+        </tbody>
     </table>
     <?php
 }

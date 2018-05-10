@@ -24,12 +24,13 @@ $_SESSION["clave"] = "";
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="scripts/select2/select2.min.css">
         <!--===============================================================================================-->
+        <link href="scripts/jquery-confirm-v3/dist/jquery-confirm.min.css" rel="stylesheet" type="text/css"/>
+        <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="styles/login-util.css">
         <link rel="stylesheet" type="text/css" href="styles/login-main.css">
         <!--===============================================================================================-->
     </head>
     <body>
-
         <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">
@@ -43,7 +44,7 @@ $_SESSION["clave"] = "";
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Es necesario validar el servidor: 172.17.23.218/www.dapberry.com">
-                            <input class="input100" type="text" name="servidor" placeholder="Servidor">
+                            <input class="input100" type="text" name="servidor" id="servidor" placeholder="Servidor">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-server" aria-hidden="true"></i>
@@ -51,7 +52,7 @@ $_SESSION["clave"] = "";
                         </div>
                         
                         <div class="wrap-input100 validate-input" data-validate = "Hay que especificar un usuario: admin">
-                            <input class="input100" type="text" name="usuario" placeholder="Usuario">
+                            <input class="input100" type="text" name="usuario" id="usuario" placeholder="Usuario">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-user" aria-hidden="true"></i>
@@ -59,7 +60,7 @@ $_SESSION["clave"] = "";
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Debes pertenecer a un dominio: example.com">
-                            <input class="input100" type="text" name="dominio" placeholder="Dominio">
+                            <input class="input100" type="text" name="dominio" id="dominio" placeholder="Dominio">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-code-fork" aria-hidden="true"></i>
@@ -67,7 +68,7 @@ $_SESSION["clave"] = "";
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Es necesaria una contraseña">
-                            <input class="input100" type="password" name="clave" placeholder="Clave">
+                            <input class="input100" type="password" name="clave" id="clave" placeholder="Clave">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
@@ -98,6 +99,11 @@ $_SESSION["clave"] = "";
                             </a>
                         </div>-->
                     </form>
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn" onclick="listaServidores();">
+                                Usar un servidor de la lista
+                            </button>
+                        </div>
                 </div>
             </div>
         </div>
@@ -119,6 +125,8 @@ $_SESSION["clave"] = "";
                 scale: 1.1
             })
         </script>
+        
+        <script src="scripts/jquery-confirm-v3/dist/jquery-confirm.min.js" type="text/javascript"></script>
         <!--===============================================================================================-->
         <script src="scripts/login-main.js"></script>
 

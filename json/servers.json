@@ -18,6 +18,11 @@
             "servidor": "172.17.23.159",
             "dominio": "francisco.com",
             "usuario": "admin",
-            "clave": "velocidad123"
+            "clave": ""
+        }, {
+            "servidor": "172.17.23.218",
+            "dominio": "dapberry.com",
+            "usuario": "admin",
+            "clave": ""
         }
     ]

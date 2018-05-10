@@ -130,6 +130,63 @@ iframe {
 	border: none !important;
 }
 
+.rejilla {
+    text-align: left;
+    line-height: 40px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid #c850c0;
+    width: 100%;
+    margin: 0px auto;
+    border-radius: .25rem;
+}
+
+.rejilla thead tr:first-child {
+    background: #c850c0;
+    color: #fff;
+    border: none;
+}
+
+.rejilla thead tr:last-child th {
+    border-bottom: 3px solid #ddd;
+}
+
+.rejilla th:first-child {
+    cursor: pointer;
+}
+
+.rejilla th:first-child, .rejilla td:first-child {
+    padding: 0 15px 0 20px;
+}
+
+.rejilla tbody tr:hover {
+    background-color: #f2f2f2;
+    cursor: default;
+}
+
+.rejilla tbody tr:last-child td {
+    border: none;
+}
+
+.rejilla tbody td {
+    border-bottom: 1px solid #ddd;
+}
+
+.rejilla td:last-child {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.rejilla .button {
+  color: #aaa;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+
+.rejilla .edit:hover, .rejilla .delete:hover, .rejilla .info:hover {
+  color: #0a79df;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
