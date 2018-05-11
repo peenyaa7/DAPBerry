@@ -202,7 +202,23 @@ function seleccionarNodoArbol(id) {
     peticionAJAXContenido(id);
 }
 
+//function spinnerLoading(idSpinner, boolean) {
+//    if (boolean === true) {
+//        var loading1 = document.createElement("div");
+//        loading1.setAttribute("class", "loading");
+//        var loading2 = document.createElement("div");
+//        loading2.setAttribute("class", "loading2");
+//        loading1.appendChild(loading2);
+//        document.getElementById(idSpinner).appendChild(loading1);
+//    } else if (boolean === false) {
+//        
+//    }
+//
+//}
+
 function peticionAJAXArbol() {
+    $("#treeSpinnerLoading").css("display", "block");
+    $("#treeLDAPForm").empty();
     $.ajax({
         type: "POST",
         url: "../php/controlador.php",
@@ -210,13 +226,15 @@ function peticionAJAXArbol() {
             accion: "ajaxcontenidoentrada"
         }
     }).done(function (response) {
-        $("#treeLDAPForm").empty();
+        $("#treeSpinnerLoading").css("display", "none");
         $("#treeLDAPForm").html(response);
         inicializarArbol();
     });
 }
 
 function peticionAJAXContenido(ruta) {
+    $("#contenido").empty();
+    $("#contentSpinnerLoading").css("display", "block");
     $.ajax({
         type: "POST",
         url: "../php/listar.php",
@@ -224,7 +242,7 @@ function peticionAJAXContenido(ruta) {
             ruta: ruta
         }
     }).done(function (response) {
-        $("#contenido").empty();
+        $("#contentSpinnerLoading").css("display", "none");
         $("#contenido").html(response);
     });
 }

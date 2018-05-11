@@ -277,7 +277,7 @@ function crearArbol($rutaPadre) {
 
 function agregarEntradasUnNivel($conexion, $rutaPadre) {
     $filtro = "(|(uid=*)(cn=*)(ou=*)(objectClass=*)(uniquemember=*)(o=*))";
-    $resultados = ldap_list($conexion, $rutaPadre, $filtro);
+    $resultados = ldap_list($conexion, $rutaPadre, $filtro); //, [], 0, 1000);
     $datos = ldap_get_entries($conexion, $resultados);
     if ($datos["count"] > 0) {
         echo "<ul>";

@@ -1,0 +1,69 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-may-2018, 12:22:14
+    Author     : peeny
+*/
+
+/*bigger div*/ 
+.loading {
+  width: 50px;
+  height: 50px;
+  animation: moving 1.3s infinite;
+}
+/*smaller div*/
+.loading2 {
+  width: 35px;
+  height: 35px;
+  animation: moving1 1.3s infinite;
+}
+
+.loading, .loading2 {
+  /* Centering Percentage Width/Height Elements*/
+  position: absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  /*radiusing the element*/
+  border: 2px solid #fff;
+  border-right-color: #03A9F4;
+  border-radius: 50%;
+}
+/*smaller div animation*/
+@keyframes moving {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+    border-right-color: #fff;
+    border-top-color: #03A9F4;
+    border-bottom-color: #03A9F4;
+  }
+}
+/*bigger div animation*/
+@keyframes moving1 {
+  from, to {
+    transform:translate(-50%,-50%);
+  }
+  25% {
+    transform:translate(70%);
+    border-top-color: #03A9F4;
+  }
+  50% {
+    transform:translate(70%);
+    border-bottom-color: #03A9F4;
+  }
+  to {
+    border-left-color: #03A9F4;
+  }
+}
+
+/*
+<div class="loading">
+  <div class="loading2"></div>
+</div>
+*/

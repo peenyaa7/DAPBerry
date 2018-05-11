@@ -31,12 +31,9 @@
                 <th><i class="material-icons">person_outline</i> Usuario: </th>
                 <td>
                     <?php
-                    if ($_SESSION["cn"] !== "")
-                    {
+                    if ($_SESSION["cn"] !== "") {
                         echo $_SESSION["cn"];
-                    }
-                    else
-                    {
+                    } else {
                         echo "- Usuario -";
                     }
                     ?>
@@ -45,28 +42,22 @@
             <tr>
                 <th><i class="material-icons">public</i> Dominio: </th>
                 <td>
-                    <?php
-                    if ($_SESSION["basedn"] !== "")
-                    {
-                        echo $_SESSION["basedn"];
-                    }
-                    else
-                    {
-                        echo "- Dominio -";
-                    }
-                    ?>
+<?php
+if ($_SESSION["basedn"] !== "") {
+    echo $_SESSION["basedn"];
+} else {
+    echo "- Dominio -";
+}
+?>
                 </td>
             </tr>
             <tr>
                 <th><i class="material-icons">desktop_windows</i> Servidor: </th>
                 <td>
                     <?php
-                    if ($_SESSION["servidor"] !== "")
-                    {
+                    if ($_SESSION["servidor"] !== "") {
                         echo $_SESSION["servidor"];
-                    }
-                    else
-                    {
+                    } else {
                         echo "- Servidor -";
                     }
                     ?>
@@ -79,8 +70,9 @@
 <div class="horizontalHole"></div>
 <!-- B de Buscar -->
 <div id="B">
-    <input type="text" id="buscarArbol" placeholder=" Busca aqui"/>
+    <input type="text" id="buscarArbol" placeholder="* Busca aqui *"/>
 </div>
 <div class="horizontalHole"></div>
+<div id="treeSpinnerLoading" class="spinnerLoading"></div>
 <form id="treeLDAPForm">
 </form>
