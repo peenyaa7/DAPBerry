@@ -56,5 +56,15 @@ include_once 'utilities.php';
             </div>
         </div>
         <hr class="linea">
+	<div class="footer" id="terminal" style="
+	    	position: fixed;
+	    	width: 100%;
+	    	bottom: 0;
+	   	background: white;
+	    	text-align: center;
+	">
+		<button id="switchTerminal">Terminal</button>
+		<button id="refreshTerminal">Refrescar terminal</button>
+	</div>
     </body>
 </html>

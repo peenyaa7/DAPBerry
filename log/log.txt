@@ -10,3 +10,31 @@
 "--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
 "--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena
 Ouuuu yeeeeaaah
+--> [2018-05-22 11:26:28][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Info] - Inicio de sesión
+--> [2018-05-22 11:26:28][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 13:18:03][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Info] - Inicio de sesión
+--> [2018-05-22 13:18:03][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 13:20:36][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 13:21:19][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 13:28:10][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 13:36:45][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 13:38:11][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Info] - Inicio de sesión
+--> [2018-05-22 13:38:11][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 13:40:39][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX al servidor LDAP (Información de la aplicación)
+--> [2018-05-22 13:40:56][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Éxito al conectar al servidor LDAP al hacer la petición AJAX para la información de una entrada (cn=admin,dc=example,dc=com)
+--> [2018-05-22 13:54:46][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:07:31][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Info] - Inicio de sesión
+--> [2018-05-22 14:07:31][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:09:00][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:11:13][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:24:17][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:25:52][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:26:55][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:27:43][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:28:10][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:28:22][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:28:42][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:29:22][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Info] - Inicio de sesión
+--> [2018-05-22 14:29:23][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:29:39][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP
+--> [2018-05-22 14:35:35][ldap.forumsys.com][cn=read-only-admin,dc=example,dc=com][Debug] - Petición AJAX para el contenido del arbol LDAP

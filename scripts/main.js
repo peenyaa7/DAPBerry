@@ -10,6 +10,15 @@ function inicializar() {
     asignarEventos();
     $("#contenidoBuscar").tabs();
     $(".rejilla").tablesorter();
+    inicializarTerminal();
+}
+
+function inicializarTerminal() {
+    $("#terminal").append("<div id='terminalResizable'><iframe src='https://"+window.location.host+":3001' id='iframeTerminal'>Cargando terminal...</iframe></div>");
+}
+
+function mostrarTerminal() {
+    var buttonTerminal = $("#switchTerminal").on
 }
 
 function asignarEventos() {
@@ -21,6 +30,13 @@ function asignarEventos() {
     });
     $("#TUAyuda").click(function () {
         dialogoManual();
+    });
+    $("#switchTerminal").click(function() {
+	$("#iframeTerminal").toggle();
+	$("#refreshTerminal").toggle();
+    });
+    $("#refreshTerminal").click(function() {
+	document.getElementById("iframeTerminal").src+='';
     });
 }
 

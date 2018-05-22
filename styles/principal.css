@@ -124,4 +124,13 @@ button#nuevaEntrada {
     height: 100%;
     width: 100%;
 }
+
+#iframeTerminal {
+    width: 100%;
+    display: none;
+}
+
+#refreshTerminal {
+    display: none;
+}
 /*asdfasdf*/
