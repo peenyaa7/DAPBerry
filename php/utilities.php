@@ -30,9 +30,11 @@ function conectar() {
         if ($ldap_bind) {
             return $ldap_conn;
         } else {
+            checkeo($ldap_conn);
             return false;
         }
     } else {
+        checkeo($ldap_conn);
         return false;
     }
 }
@@ -94,87 +96,87 @@ function rutaPadre($ruta) {
     return after(",", $ruta);
 }
 
-function sacarNAME($cadena) {
-    if (strpos($cadena, "NAME '")) {
-        $despuesNAME = after("NAME '", $cadena);
-        $antesSegundaComa = before("'", $despuesNAME);
-        $NAME = $antesSegundaComa;
-    } elseif (strpos($cadena, "NAME (")) {
-        $despuesNAME = after("NAME (", $cadena);
-        $antesSegundoParentesis = before(")", $despuesNAME);
-        $NAME = $antesSegundoParentesis;
-    } else {
-        $NAME = "";
-    }
-    return $NAME;
-}
-
-function sacarDESC($cadena) {
-    if (strpos($cadena, "DESC")) {
-        $despuesDESC = after("DESC", $cadena);
-        $despuesPrimeraComa = after("'", $despuesDESC);
-        $antesSegundaComa = before("'", $despuesPrimeraComa);
-        $DESC = $antesSegundaComa;
-    } else {
-        $DESC = "";
-    }
-    return $DESC;
-}
-
-function sacarSUP($cadena) {
-    if (strpos($cadena, "SUP")) {
-        $despuesSUP = after("SUP ", $cadena);
-        $antesSegundaComa = before(" ", $despuesSUP);
-        $SUP = $antesSegundaComa;
-    } else {
-        $SUP = "";
-    }
-    return $SUP;
-}
-
-function sacarTYPE($cadena) {
-    if (strpos($cadena, "STRUCTURAL")) {
-        $TYPE = "STRUCTURAL";
-    } else if (strpos($cadena, "AUXILIARY")) {
-        $TYPE = "AUXILIARY";
-    } else if (strpos($cadena, "ABSTRACT")) {
-        $TYPE = "ABSTRACT";
-    } else {
-        $TYPE = "";
-    }
-    return $TYPE;
-}
-
-function sacarMUST($cadena) {
-    if (strpos($cadena, "MUST '")) {
-        $despuesMUST = after("MUST '", $cadena);
-        $antesSegundaComa = before("'", $despuesMUST);
-        $MUST = $antesSegundaComa;
-    } else if (strpos($cadena, "MUST (")) {
-        $despuesMUST = after("MUST (", $cadena);
-        $antesSegundoParentesis = before(")", $despuesMUST);
-        $MUST = $antesSegundoParentesis;
-    } else {
-        $MUST = "";
-    }
-    return $MUST;
-}
-
-function sacarMAY($cadena) {
-    if (strpos($cadena, "MAY '")) {
-        $despuesMAY = after("MAY '", $cadena);
-        $despuesPrimerParentesis = after("'", $despuesMAY);
-        $antesSegundoParentesis = before("'", $despuesPrimerParentesis);
-        $MAY = $antesSegundoParentesis;
-    } else if (strpos($cadena, "MAY (")) {
-        $despuesMAY = after("MAY (", $cadena);
-        $antesSegundoParentesis = before(")", $despuesMAY);
-        $MAY = $antesSegundoParentesis;
-    } else {
-        $MAY = "";
-    }
-    return $MAY;
-}
+// function sacarNAME($cadena) {
+//     if (strpos($cadena, "NAME '")) {
+//         $despuesNAME = after("NAME '", $cadena);
+//         $antesSegundaComa = before("'", $despuesNAME);
+//         $NAME = $antesSegundaComa;
+//     } elseif (strpos($cadena, "NAME (")) {
+//         $despuesNAME = after("NAME (", $cadena);
+//         $antesSegundoParentesis = before(")", $despuesNAME);
+//         $NAME = $antesSegundoParentesis;
+//     } else {
+//         $NAME = "";
+//     }
+//     return $NAME;
+// }
+//
+// function sacarDESC($cadena) {
+//     if (strpos($cadena, "DESC")) {
+//         $despuesDESC = after("DESC", $cadena);
+//         $despuesPrimeraComa = after("'", $despuesDESC);
+//         $antesSegundaComa = before("'", $despuesPrimeraComa);
+//         $DESC = $antesSegundaComa;
+//     } else {
+//         $DESC = "";
+//     }
+//     return $DESC;
+// }
+//
+// function sacarSUP($cadena) {
+//     if (strpos($cadena, "SUP")) {
+//         $despuesSUP = after("SUP ", $cadena);
+//         $antesSegundaComa = before(" ", $despuesSUP);
+//         $SUP = $antesSegundaComa;
+//     } else {
+//         $SUP = "";
+//     }
+//     return $SUP;
+// }
+//
+// function sacarTYPE($cadena) {
+//     if (strpos($cadena, "STRUCTURAL")) {
+//         $TYPE = "STRUCTURAL";
+//     } else if (strpos($cadena, "AUXILIARY")) {
+//         $TYPE = "AUXILIARY";
+//     } else if (strpos($cadena, "ABSTRACT")) {
+//         $TYPE = "ABSTRACT";
+//     } else {
+//         $TYPE = "";
+//     }
+//     return $TYPE;
+// }
+//
+// function sacarMUST($cadena) {
+//     if (strpos($cadena, "MUST '")) {
+//         $despuesMUST = after("MUST '", $cadena);
+//         $antesSegundaComa = before("'", $despuesMUST);
+//         $MUST = $antesSegundaComa;
+//     } else if (strpos($cadena, "MUST (")) {
+//         $despuesMUST = after("MUST (", $cadena);
+//         $antesSegundoParentesis = before(")", $despuesMUST);
+//         $MUST = $antesSegundoParentesis;
+//     } else {
+//         $MUST = "";
+//     }
+//     return $MUST;
+// }
+//
+// function sacarMAY($cadena) {
+//     if (strpos($cadena, "MAY '")) {
+//         $despuesMAY = after("MAY '", $cadena);
+//         $despuesPrimerParentesis = after("'", $despuesMAY);
+//         $antesSegundoParentesis = before("'", $despuesPrimerParentesis);
+//         $MAY = $antesSegundoParentesis;
+//     } else if (strpos($cadena, "MAY (")) {
+//         $despuesMAY = after("MAY (", $cadena);
+//         $antesSegundoParentesis = before(")", $despuesMAY);
+//         $MAY = $antesSegundoParentesis;
+//     } else {
+//         $MAY = "";
+//     }
+//     return $MAY;
+// }
 
 function crearOU($conexion, $rutaPadre, $ou) {
     $datos["objectClass"][0] = "top";
