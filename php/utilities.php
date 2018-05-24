@@ -396,10 +396,10 @@ function escribirLog($cadena, $type) {
             fwrite($file, "\n");
             fclose($file);
         } else {
-            echo "El archivo no es writable";
+            echo "<p>El log no tiene permisos de escritura.</p>";
         }
     } else {
-        echo "El fichero LOG no existe";
+        echo "<p>El fichero LOG no existe</p>";
     }
 }
 
