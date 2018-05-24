@@ -310,11 +310,6 @@ function agregarEntradasUnNivel($conexion, $rutaPadre) {
 }
 
 function eliminarEntrada($conexion, $ruta) {
-//    $conexion = conectar();
-//    if ($conexion)
-//    {
-//        ldap_delete($conexion, $ruta);
-
 
     $entradas = ldap_list($conexion, $ruta, "ObjectClass=*", array(""));
     $datos = ldap_get_entries($conexion, $entradas);
@@ -327,7 +322,6 @@ function eliminarEntrada($conexion, $ruta) {
         }
     }
     return(ldap_delete($conexion, $ruta));
-//    }
 }
 
 function listar($rutaPadre) {
