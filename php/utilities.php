@@ -391,8 +391,12 @@ function escribirLog($cadena, $type) {
 //        echo "el fichero existe";
         if (is_writable($path)) {
 //            echo "el fichero es writable";
+            $fechaLog = "[" . date("Y-m-d H:i:s") . "]";
+            $serverLog = "[" . $server . "]";
+            $userLog = "[" . $user . "]";
+            $typeLog = "[" . $type . "]";
             $file = fopen($path, "a+"); // El modo 'a+' es para apertura para escritura y lectura, tambien coloca el puntero al final del fichero.
-            fwrite($file, "--> [" . date("Y-m-d H:i:s") . "][" . $server . "][" . $user . "][" . $type . "]" . " - " . $cadena);
+            fwrite($file, $cadena . " < " . $typeLog . $userLog . $serverLog . $fechaLog);
             fwrite($file, "\n");
             fclose($file);
         } else {
