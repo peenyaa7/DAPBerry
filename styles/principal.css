@@ -126,6 +126,8 @@ button#nuevaEntrada {
 }
 
 #iframeTerminal {
+    resize: vertical;
+    height: 20em;
     width: 100%;
     display: none;
 }
