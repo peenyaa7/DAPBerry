@@ -48,7 +48,7 @@ include_once 'utilities.php';
                         </script>
                         <?php
                     } else {
-                        <?php
+                        ?>
                             <div id="titulo">
                                 ¡Bienvenido!
                             </div>
@@ -60,7 +60,7 @@ include_once 'utilities.php';
                                 <p>Disfruta y en caso de donacion o querer mas informacion, pinche en 'Info'.</p>
                             </div>
                             <div class="clear"></div>
-                        ?>
+                        <?php
                     }
                     ?>
                 </div>
