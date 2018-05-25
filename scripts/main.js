@@ -386,7 +386,7 @@ function nuevaEntradaUnidadOrganizativa(rutaPadre) {
 
 
 function nuevaEntradaUsuario(rutaPadre) {
-    $.dialog({
+    $.confirm({
         title: "Usuario dentro de <span class='destacarspan'>" + rutaPadre + "</span>",
         theme: 'supervan',
         columnClass: 'medium',
