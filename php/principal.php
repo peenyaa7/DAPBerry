@@ -9,7 +9,7 @@ include_once 'utilities.php';
         <meta charset="UTF-8">
         <!--<meta charset="ISO-8859-1">-->
         <title>Gestión de LDAP</title>
-        <link rel="icon" type="image/png" href="../images/favicon.png"/>
+        <link rel="icon" type="image/png" href="../images/Logo.png"/>
         <!-- Scripts -->
         <script src="../scripts/jquery/jquery-3.3.1.js" type="text/javascript"></script>
         <script src="../scripts/jquery/jqueryui/jquery-ui.js" type="text/javascript"></script>

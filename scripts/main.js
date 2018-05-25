@@ -79,7 +79,7 @@ function dialogoManual() {
                             var self = this;
                             return $.ajax({
                                 type: "POST",
-                                url: "../php/controlador.php",
+                                url: "../php/controller.php",
                                 data: {
                                     accion: "ajaxinformacionaplicacion"
                                 }
@@ -152,7 +152,7 @@ function listarLog() {
             var self = this;
             return $.ajax({
                 type: "POST",
-                url: "../php/controlador.php",
+                url: "../php/controller.php",
                 data: {
                     accion: "obtenerlog"
                 }
@@ -175,7 +175,7 @@ function listarLog() {
                 action: function () {
                     $.ajax({
                         type: "POST",
-                        url: "../php/controlador.php",
+                        url: "../php/controller.php",
                         data: {
                             accion: "borrarlog"
                         }
@@ -214,30 +214,15 @@ function inicializarArbol() {
 }
 
 function seleccionarNodoArbol(id) {
-//    window.location = "./principal.php?accion=buscar&ruta=" + id;
     peticionAJAXContenido(id);
 }
-
-//function spinnerLoading(idSpinner, boolean) {
-//    if (boolean === true) {
-//        var loading1 = document.createElement("div");
-//        loading1.setAttribute("class", "loading");
-//        var loading2 = document.createElement("div");
-//        loading2.setAttribute("class", "loading2");
-//        loading1.appendChild(loading2);
-//        document.getElementById(idSpinner).appendChild(loading1);
-//    } else if (boolean === false) {
-//        
-//    }
-//
-//}
 
 function peticionAJAXArbol() {
     $("#treeSpinnerLoading").css("display", "block");
     $("#treeLDAPForm").empty();
     $.ajax({
         type: "POST",
-        url: "../php/controlador.php",
+        url: "../php/controller.php",
         data: {
             accion: "ajaxcontenidoentrada"
         }
@@ -253,7 +238,7 @@ function peticionAJAXContenido(ruta) {
     $("#contentSpinnerLoading").css("display", "block");
     $.ajax({
         type: "POST",
-        url: "../php/controlador.php",
+        url: "../php/controller.php",
         data: {
             ruta: ruta,
             accion: "listar"
@@ -332,7 +317,7 @@ function nuevaEntradaUnidadOrganizativa(rutaPadre) {
                 '<p>Una Unidad Organizativa es un contenedor de objetos que permite organizarlos en subconjuntos,' +
                 'dentro del dominio, siguiendo una jerarquía. De este modo, podremos establecer una estructura' +
                 'lógica que represente de forma adecuada nuestra organización y simplifique la administración.<p>' +
-                '<form action="controlador.php" method="GET">' +
+                '<form action="controller.php" method="GET">' +
                 '<table class="formAgregar">' +
                 '<tr>' +
                 '<td><label class="obligatorio">Nombre:</label></td>' +
@@ -352,7 +337,7 @@ function nuevaEntradaUnidadOrganizativa(rutaPadre) {
                     }
                     $.ajax({
                         type: "POST",
-                        url: "../php/controlador.php",
+                        url: "../php/controller.php",
                         data: {
                             accion: "ajaxagregarunidadorganizativa",
                             ouUnidadOrganizativa: ouUnidadOrganizativa,
@@ -385,9 +370,9 @@ function nuevaEntradaUnidadOrganizativa(rutaPadre) {
 }
 
 
-function nuevaEntradaUsuario(rutaPadre) {
+function nuevaEntradaUsuario(path) {
     $.confirm({
-        title: "Usuario dentro de <span class='destacarspan'>" + rutaPadre + "</span>",
+        title: "Usuario dentro de <span class='destacarspan'>" + path + "</span>",
         theme: 'supervan',
         columnClass: 'medium',
         content: "" +
@@ -396,7 +381,7 @@ function nuevaEntradaUsuario(rutaPadre) {
                 'adquiere una computadora o dispositivo electrónico y que lo emplea para comunicarse' +
                 'con otros usuarios, generar contenido y documentos, utilizar software de diverso' +
                 'tipo y muchas otras acciones posibles.<p>' +
-                '<form action="controlador.php" method="GET">' +
+                '<form action="controller.php" method="GET">' +
                 '<table class="formAgregar">' +
                 '<tr>' +
                 '<td><label class="obligatorio">Nombre de usuario (uid):</label></td>' +
@@ -474,7 +459,7 @@ function nuevaEntradaUsuario(rutaPadre) {
                     }
                     $.ajax({
                         type: "POST",
-                        url: "../php/controlador.php",
+                        url: "../php/controller.php",
                         data: {
                             accion: "ajaxagregarusuario",
                             uidUsuario: uidUsuario,
@@ -483,10 +468,10 @@ function nuevaEntradaUsuario(rutaPadre) {
                             uidIDUsuario: uidIDUsuario,
                             uidIDGrupo: uidIDGrupo,
                             uidPassword: uidPassword,
-                            ruta: rutaPadre
+                            ruta: path
                         }
                     }).done(function () {
-                        peticionAJAXContenido(rutaPadre);
+                        peticionAJAXContenido(path);
                         peticionAJAXArbol();
                     }).fail(function () {
                         window.location = "../php/error.php";
@@ -511,27 +496,89 @@ function nuevaEntradaUsuario(rutaPadre) {
     });
 }
 
-function nuevaEntradaOtro(rutaPadre) {
-    $.dialog({
-        title: "Otra cosa dentro de <span class='destacarspan'>" + rutaPadre + "</span>",
-        boxWidth: '40%',
+function nuevaEntradaDispositivo(rutaPadre) {
+    $.confirm({
+        title: "Crear dispositivo dentro de <span class='destacarspan'>" + rutaPadre + "</span>",
         theme: 'supervan',
-        content: function () {
-            var self = this;
-            return $.ajax({
-                type: "POST",
-                url: "../php/nuevootro.php",
-                data: {
-                    ruta: rutaPadre
+        columClass: "medium",
+        content: "" +
+                '<p>Una Unidad Organizativa es un contenedor de objetos que permite organizarlos en subconjuntos,' +
+                'dentro del dominio, siguiendo una jerarquía. De este modo, podremos establecer una estructura' +
+                'lógica que represente de forma adecuada nuestra organización y simplifique la administración.<p>' +
+                '<form action="controller.php" method="GET">' +
+                '<table class="formAgregar">' +
+                '<tr>' +
+                '<td><label class="obligatorio">Nombre:</label></td>' +
+                '<td><input type="text" name="cnNombre" id="cnNombre" placeholder="Obligatorio"/></td>' +
+                '</tr>' +
+                '</table>' +
+                '</form> ',
+        buttons: {
+            formSubmit: {
+                text: 'Crear dispositivo!',
+                btnClass: 'btn-blue',
+                action: function () {
+                    var cnNombre = this.$content.find('#cnNombre').val();
+                    if (!cnNombre) {
+                        $.alert('Establece un nombre');
+                        return false;
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "../php/controller.php",
+                        data: {
+                            accion: "ajaxagregardispositivo",
+                            cnNombre: cnNombre,
+                            ruta: rutaPadre
+                        }
+                    }).done(function () {
+                        peticionAJAXContenido(rutaPadre);
+                        peticionAJAXArbol();
+                    }).fail(function () {
+                        window.location = "../php/error.php";
+                    });
+
+
                 }
-            }).done(function (response) {
-                self.setContentAppend(response);
-            }).fail(function () {
-                self.setContentAppend("<p>Algun error con la peticion AJAX en la funcion nuevaEntrada</p>");
+            },
+            cancel: function () {
+                //close
+            }
+        },
+        onContentReady: function () {
+            // bind to events
+            var self = this;
+            this.$content.find('form').on('submit', function (event) {
+                // if the user submits the form by pressing enter in the field.
+                event.preventDefault();
+                self.$$formSubmit.trigger('click'); // reference the button and click it
             });
         }
     });
 }
+
+//function nuevaEntradaOtro(rutaPadre) {
+//    $.dialog({
+//        title: "Dispositivo dentro de <span class='destacarspan'>" + rutaPadre + "</span>",
+//        boxWidth: '40%',
+//        theme: 'supervan',
+//        content: function () {
+//            var self = this;
+//            return $.ajax({
+//                type: "POST",
+//                url: "../php/controller.php",
+//                data: {
+//                    accion: "ajaxagregardispositivo",
+//                    ruta: rutaPadre
+//                }
+//            }).done(function (response) {
+//                self.setContentAppend(response);
+//            }).fail(function () {
+//                self.setContentAppend("<p>Algun error con la peticion AJAX en la funcion nuevaEntrada</p>");
+//            });
+//        }
+//    });
+//}
 
 function informacionEntrada(button) {
     var dn = button.parentNode.parentNode.getAttribute("dn");
@@ -541,7 +588,7 @@ function informacionEntrada(button) {
             var self = this;
             return $.ajax({
                 type: "POST",
-                url: "../php/controlador.php",
+                url: "../php/controller.php",
                 data: {
                     accion: "ajaxinformacionentrada",
                     ruta: dn
@@ -602,7 +649,7 @@ function modificarEntradaNuevoAtributo(dn) {
             var self = this;
             return $.ajax({
                 type: "POST",
-                url: "../php/controlador.php",
+                url: "../php/controller.php",
                 data: {
                     accion: "ajaxformagregaratributo"
 //                    ruta: dn
@@ -626,7 +673,7 @@ function modificarEntradaNuevoAtributo(dn) {
                     }
                     $.ajax({
                         type: "POST",
-                        url: "../php/controlador.php",
+                        url: "../php/controller.php",
                         data: {
                             accion: "ajaxagregaratributo",
                             atributo: atributo,
@@ -670,7 +717,7 @@ function modificarEntradaModificarAtributo(dn) {
             var self = this;
             return $.ajax({
                 type: "POST",
-                url: "../php/controlador.php",
+                url: "../php/controller.php",
                 data: {
                     accion: "ajaxformmodificaratributo",
                     ruta: dn
@@ -694,7 +741,7 @@ function modificarEntradaModificarAtributo(dn) {
                     }
                     $.ajax({
                         type: "POST",
-                        url: "../php/controlador.php",
+                        url: "../php/controller.php",
                         data: {
                             accion: "ajaxmodificaratributo",
                             atributo: atributo,
@@ -750,7 +797,7 @@ function eliminarEntrada(button) {
                 action: function () {
                     $.ajax({
                         type: "POST",
-                        url: "../php/controlador.php",
+                        url: "../php/controller.php",
                         data: {
                             accion: "ajaxeliminarentrada",
                             ruta: dn

@@ -2,7 +2,7 @@
 include_once './LOG_functions.php';
 /* FUNCIONES AJAX */
 
-function AJAXInformacionEntrada($conexion, $ruta) {
+function AJAX_informacionEntrada($conexion, $ruta) {
     escribirLog("Petición AJAX (Información de entrada)", "Debug");
     // El filtro es el RDN del DN
     $filtro = before(",", $ruta);
@@ -29,7 +29,7 @@ function AJAXInformacionEntrada($conexion, $ruta) {
     ldap_free_result($resultados);
 }
 
-function AJAXFormModificarAtributo($conexion, $dn) {
+function AJAX_formModificarAtributo($conexion, $dn) {
     escribirLog("Petición AJAX (Formulario para modificar atributo)", "Debug");
     ?>
     <form>
@@ -65,22 +65,28 @@ function AJAXFormModificarAtributo($conexion, $dn) {
     <?php
 }
 
-function AJAXEliminarEntrada($link_identifier, $ruta) {
-
-    $entradas = ldap_list($link_identifier, $ruta, "ObjectClass=*", array(""));
-    $datos = ldap_get_entries($link_identifier, $entradas);
-    for ($i = 0; $i < $datos['count']; $i++) {
+function AJAX_eliminarEntrada($link_identifier, $dn) {
+    escribirLog("Eliminación de la entrada '$dn'", "Debug");
+    $entries = ldap_list($link_identifier, $dn, "ObjectClass=*", array(""));
+    $data = ldap_get_entries($link_identifier, $entries);
+    for ($i = 0; $i < $data['count']; $i++) {
         // Eliminando recursivamente sub-entradas
-        $result = eliminarEntrada($link_identifier, $datos[$i]['dn']);
+        $result = eliminarEntrada($link_identifier, $data[$i]['dn']);
         if (!$result) {
             //return result code, if delete fails
             return($result);
         }
     }
-    return(ldap_delete($link_identifier, $ruta));
+    $boolean = ldap_delete($link_identifier, $dn);
+    if ($boolean) {
+        escribirLog("Entrada '$dn' eliminada correctamente", "Info");
+    } else {
+        escribirLog("Error al eliminar la entrada '$dn'", "Error");
+    }
+    return $boolean;
 }
 
-function AJAXModificarAtributo($conexion, $ruta, $atributo, $contenidoAtributo) {
+function AJAX_modificarAtributo($conexion, $ruta, $atributo, $contenidoAtributo) {
     escribirLog("Petición AJAX (Modificar atributo)", "Debug");
     $datos[$atributo] = $contenidoAtributo;
     $resultados = ldap_mod_replace($conexion, $ruta, $datos);
@@ -96,7 +102,7 @@ function AJAXModificarAtributo($conexion, $ruta, $atributo, $contenidoAtributo) 
     ldap_free_result($resultados);
 }
 
-function AJAXFormAgregarAtributo() {
+function AJAX_formAgregarAtributo() {
     escribirLog("Petición AJAX (Formulario para agregar atributo)", "Debug");
     escribirLog("Se ha agregado el formulario correctamente", "Info");
     ?>
@@ -107,23 +113,22 @@ function AJAXFormAgregarAtributo() {
     <?php
 }
 
-function AJAXAgregarAtributo($conexion, $ruta, $atributo, $contenidoAtributo) {
+function AJAX_agregarAtributo($link_identifier, $dn, $attribute, $attributeContent) {
     escribirLog("Petición AJAX (Agregar atributo)", "Debug");
-    $datos[$atributo] = $contenidoAtributo;
-    $resultados = ldap_mod_add($conexion, $ruta, $datos);
-    if ($resultados) {
+    $data[$attribute] = $attributeContent;
+    $result = ldap_mod_add($link_identifier, $dn, $data);
+    if ($result) {
         escribirLog("Se ha agregado el atributo correctamente", "Info");
     } else {
         escribirLog("Ocurrió un error al agregar el atributo"
-                . "\nNúmero error: " . ldap_errno($conexion)
-                . "\nError: " . ldap_error($conexion), "Error");
-//        escribirLog("Información del error.\nNúmero error: ".ldap_errno($conexion)."\nError: ".ldap_error($conexion), "Error");
+                . "\nNúmero error: " . ldap_errno($link_identifier)
+                . "\nError: " . ldap_error($link_identifier), "Error");
         alert("Algun error en la funcion 'AJAXAgregarAtributo'");
     }
-    ldap_free_result($resultados);
+    ldap_free_result($result);
 }
 
-function AJAXContenidoArbol($link_identifier) {
+function AJAX_contenidoArbol($link_identifier) {
     escribirLog("Petición AJAX (Contenido árbol LDAP)", "Debug");
     escribirLog("Contenido del árbol LDAP agregado correctamente", "Info");
     ?>
@@ -137,7 +142,7 @@ function AJAXContenidoArbol($link_identifier) {
     <?php
 }
 
-function AJAXInformacionAplicacion() {
+function AJAX_informacionAplicacion() {
     escribirLog("Petición AJAX (Información de la aplicación)", "Debug");
     escribirLog("Información de la aplicación agregada correctamente", "Info");
     ?>
@@ -186,7 +191,7 @@ function AJAXInformacionAplicacion() {
     <?php
 }
 
-function AJAXObtenerListaServidores() {
+function AJAX_obtenerListaServidores() {
     escribirLog("Petición AJAX (Obtener lista de servidores)", "Debug");
     $path = "../json/servers.json";
     if (file_exists($path)) {
