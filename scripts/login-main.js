@@ -5,7 +5,7 @@ function listaServidores() {
             var self = this;
             return $.ajax({
                 type: "POST",
-                url: "php/controlador.php",
+                url: "php/controller.php",
                 data: {
                     accion: "ajaxobtenerlistaservidores"
                 }
