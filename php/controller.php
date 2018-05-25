@@ -20,6 +20,8 @@ if (isset($_REQUEST["accion"])) {
         } else {
             header("Location: ../index.php");
         }
+    } elseif ($accion == "ajaxobtenerlistaservidores") {
+        AJAX_obtenerListaServidores();
     } else {
         $link_identifier = conectar();
         if ($link_identifier) {
@@ -96,9 +98,6 @@ if (isset($_REQUEST["accion"])) {
                     AJAX_eliminarEntrada($link_identifier, $_REQUEST["ruta"]);
 //                $rutaPadre = rutaPadre($ruta);
 //                header("Location: principal.php?accion=buscar&ruta=" . $rutaPadre);
-                    break;
-                case "ajaxobtenerlistaservidores":
-                    AJAX_obtenerListaServidores();
                     break;
                 case "obtenerlog":
                     obtenerLOG();

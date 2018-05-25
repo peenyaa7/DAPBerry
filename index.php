@@ -38,7 +38,7 @@ $_SESSION["clave"] = "";
                         <img src="images/Logo.png" alt="IMG">
                     </div>
 
-                    <form class="login100-form validate-form" action="php/controlador.php">
+                    <form class="login100-form validate-form" action="php/controller.php">
                         <span class="login100-form-title">
                             DAPBerry
                         </span>
@@ -123,7 +123,7 @@ $_SESSION["clave"] = "";
         <script >
             $('.js-tilt').tilt({
                 scale: 1.1
-            })
+            });
         </script>
         
         <script src="scripts/jquery-confirm-v3/dist/jquery-confirm.min.js" type="text/javascript"></script>
