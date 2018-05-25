@@ -253,9 +253,10 @@ function peticionAJAXContenido(ruta) {
     $("#contentSpinnerLoading").css("display", "block");
     $.ajax({
         type: "POST",
-        url: "../php/listar.php",
+        url: "../php/controlador.php",
         data: {
-            ruta: ruta
+            ruta: ruta,
+            accion: "listar"
         }
     }).done(function (response) {
         $("#contentSpinnerLoading").css("display", "none");

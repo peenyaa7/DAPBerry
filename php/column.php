@@ -42,13 +42,13 @@
             <tr>
                 <th><i class="material-icons">public</i> Dominio: </th>
                 <td>
-<?php
-if ($_SESSION["basedn"] !== "") {
-    echo $_SESSION["basedn"];
-} else {
-    echo "- Dominio -";
-}
-?>
+                    <?php
+                    if ($_SESSION["basedn"] !== "") {
+                        echo $_SESSION["basedn"];
+                    } else {
+                        echo "- Dominio -";
+                    }
+                    ?>
                 </td>
             </tr>
             <tr>

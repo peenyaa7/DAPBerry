@@ -20,21 +20,30 @@
  */
 
 function conectar() {
+    escribirLog("Petición para conexión al servidor LDAP", "Debug");
     $ldap_server = $_SESSION["servidor"];
-    $ldap_conn = ldap_connect($ldap_server) or die("No se puede conectar al servidor LDAP.");
-    ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3); // Esto soluciona el error del protocolo
-    if ($ldap_conn) {
+    $link_identifier = ldap_connect($ldap_server) or die("No se puede conectar al servidor LDAP.");
+    ldap_set_option($link_identifier, LDAP_OPT_PROTOCOL_VERSION, 3); // Esto soluciona el error del protocolo
+    if ($link_identifier) {
+        escribirLog("Conexión con el servidor LDAP realizada correctamente", "Info");
         $RDN = $_SESSION["cn"] . "," . $_SESSION["basedn"];
         $ldap_pass = $_SESSION["clave"];
-        $ldap_bind = ldap_bind($ldap_conn, $RDN, $ldap_pass);
+        $ldap_bind = ldap_bind($link_identifier, $RDN, $ldap_pass);
         if ($ldap_bind) {
-            return $ldap_conn;
+            escribirLog("Identificación con el servidor LDAP realizada correctamente", "Info");
+            return $link_identifier;
         } else {
-            checkeo($ldap_conn);
+            escribirLog("Hubo un error con la identificación al servidor LDAP"
+                    . "\nNúmero error: " . ldap_errno($link_identifier)
+                    . "\nError: " . ldap_error($link_identifier), "Critical");
+            checkeo($link_identifier);
             return false;
         }
     } else {
-        checkeo($ldap_conn);
+        escribirLog("No se pudo realizar la conexión al servidor LDAP"
+                . "\nNúmero error: " . ldap_errno($link_identifier)
+                . "\nError: " . ldap_error($link_identifier), "Critical");
+        checkeo($link_identifier);
         return false;
     }
 }
@@ -178,18 +187,19 @@ function rutaPadre($ruta) {
 //     return $MAY;
 // }
 
-function crearOU($conexion, $rutaPadre, $ou) {
+function crearOU($link_identifier, $rutaPadre, $ou) {
+    escribirLog("Creación de unidad organizativa...", "Debug");
     $datos["objectClass"][0] = "top";
     $datos["objectClass"][1] = "organizationalUnit";
     $datos["ou"] = $ou;
 
     $dn = "ou=" . $ou . "," . $rutaPadre;
 
-    $resultados = ldap_add($conexion, $dn, $datos);
+    $resultados = ldap_add($link_identifier, $dn, $datos);
     ldap_free_result($resultados);
 }
 
-function crearUID($conexion, $rutaPadre, $uidUsuario, $uidNombreComun, $uidCarpeta, $uidIDUsuario, $uidIDGrupo, $uidPassword) {
+function crearUID($link_identifier, $rutaPadre, $uidUsuario, $uidNombreComun, $uidCarpeta, $uidIDUsuario, $uidIDGrupo, $uidPassword) {
     $datos["objectClass"][0] = "posixAccount";
     $datos["objectClass"][1] = "shadowAccount";
     $datos["objectClass"][2] = "account";
@@ -209,7 +219,7 @@ function crearUID($conexion, $rutaPadre, $uidUsuario, $uidNombreComun, $uidCarpe
     $datos["shadowWarning"] = 7;
 
     $dn = "uid=" . $uidUsuario . "," . $rutaPadre;
-    $resultados = ldap_add($conexion, $dn, $datos);
+    $resultados = ldap_add($link_identifier, $dn, $datos);
     ldap_free_result($resultados);
 }
 
@@ -257,30 +267,28 @@ function crearUID($conexion, $rutaPadre, $uidUsuario, $uidNombreComun, $uidCarpe
 //    ldap_unbind($ldap_conexion);
 //}
 
-function crearDispositivo($cn) {
-    $conexion = conectar();
-    if ($conexion) {
-        $datos["objectClass"][0] = "top";
-        $datos["objectClass"][1] = "device";
-        $datos["cn"][0] = $cn;
-        $rutaPadre = "uid = evilla, dc = francisco, dc = com";
-        $result = ldap_add($conexion, $rutaPadre, $datos);
-        ldap_free_result($result);
-        ldap_close($conexion);
-    }
-}
+//function crearDispositivo($cn) {
+//    $conexion = conectar();
+//    if ($conexion) {
+//        $datos["objectClass"][0] = "top";
+//        $datos["objectClass"][1] = "device";
+//        $datos["cn"][0] = $cn;
+//        $rutaPadre = "uid = evilla, dc = francisco, dc = com";
+//        $result = ldap_add($conexion, $rutaPadre, $datos);
+//        ldap_free_result($result);
+//        ldap_close($conexion);
+//    }
+//}
 
-function crearArbol($rutaPadre) {
-    $conexion = conectar();
+function crearArbol($link_identifier, $rutaPadre) {
     echo $rutaPadre . "</br>";
-    agregarEntradasUnNivel($conexion, $rutaPadre);
-    ldap_close($conexion);
+    agregarEntradasUnNivel($link_identifier, $rutaPadre);
 }
 
-function agregarEntradasUnNivel($conexion, $rutaPadre) {
+function agregarEntradasUnNivel($link_identifier, $rutaPadre) {
     $filtro = "(|(uid=*)(cn=*)(ou=*)(objectClass=*)(uniquemember=*)(o=*))";
-    $resultados = ldap_list($conexion, $rutaPadre, $filtro); //, [], 0, 1000);
-    $datos = ldap_get_entries($conexion, $resultados);
+    $resultados = ldap_list($link_identifier, $rutaPadre, $filtro); //, [], 0, 1000);
+    $datos = ldap_get_entries($link_identifier, $resultados);
     if ($datos["count"] > 0) {
         echo "<ul>";
         for ($i = 0; $i < count($datos) - 1; $i++) {
@@ -301,7 +309,7 @@ function agregarEntradasUnNivel($conexion, $rutaPadre) {
                     }
                     ?>"}'><?php
                         echo before(",", $entrada);
-                        agregarEntradasUnNivel($conexion, $entrada);
+                        agregarEntradasUnNivel($link_identifier, $entrada);
                         ?></li><?php
             }
         }
@@ -309,33 +317,18 @@ function agregarEntradasUnNivel($conexion, $rutaPadre) {
     }
 }
 
-function eliminarEntrada($conexion, $ruta) {
 
-    $entradas = ldap_list($conexion, $ruta, "ObjectClass=*", array(""));
-    $datos = ldap_get_entries($conexion, $entradas);
-    for ($i = 0; $i < $datos['count']; $i++) {
-        // Eliminando recursivamente sub-entradas
-        $result = eliminarEntrada($conexion, $datos[$i]['dn']);
-        if (!$result) {
-            //return result code, if delete fails
-            return($result);
-        }
-    }
-    return(ldap_delete($conexion, $ruta));
-}
-
-function listar($rutaPadre) {
+function listar($link_identifier, $rutaPadre) {
     $ruta = $rutaPadre;
-    $conexion = conectar();
     $filtro = "(|(uid=*)(cn=*)(ou=*)(objectClass=*)(uniquemember=*)(o=*))";
-    $resultados = ldap_list($conexion, $ruta, $filtro);
-    $entries = ldap_get_entries($conexion, $resultados);
-    if (ldap_count_entries($conexion, $resultados) > 0) {
+    $resultados = ldap_list($link_identifier, $ruta, $filtro);
+    $entries = ldap_get_entries($link_identifier, $resultados);
+    if (ldap_count_entries($link_identifier, $resultados) > 0) {
         ?>
         <table class="rejilla">
             <thead>
                 <tr>
-                    <th><?php echo "El numero de entradas encontradas es: " . ldap_count_entries($conexion, $resultados); ?></th>
+                    <th><?php echo "El numero de entradas encontradas es: " . ldap_count_entries($link_identifier, $resultados); ?></th>
                     <th></th>
                 </tr>
             </thead>
@@ -362,76 +355,4 @@ function listar($rutaPadre) {
         echo "<p>¿Crear una?</p>";
     }
     ldap_free_result($resultados);
-    ldap_close($conexion);
-}
-
-function escribirLog($cadena, $type) {
-    /*
-     * Types of errors
-     * - Info
-     * - Error
-     * - Warn
-     * - Debug
-     * - Critical
-     */
-
-    if (isset($_SESSION["cn"]) && isset($_SESSION["basedn"])) {
-        $user = $_SESSION["cn"] . "," . $_SESSION["basedn"];
-    } else {
-        $user = "Usuario no especificado";
-    }
-
-    if (isset($_SESSION["servidor"])) {
-        $server = $_SESSION["servidor"];
-    } else {
-        $server = "Servidor no especificado";
-    }
-    $path = "../log/log.txt";
-    if (file_exists($path)) {
-//        echo "el fichero existe";
-        if (is_writable($path)) {
-//            echo "el fichero es writable";
-            $fechaLog = "[" . date("Y-m-d H:i:s") . "]";
-            $serverLog = "[" . $server . "]";
-            $userLog = "[" . $user . "]";
-            $typeLog = "[" . $type . "]";
-            $file = fopen($path, "a+"); // El modo 'a+' es para apertura para escritura y lectura, tambien coloca el puntero al final del fichero.
-            fwrite($file, $cadena . " < " . $typeLog . $userLog . $serverLog . $fechaLog);
-            fwrite($file, "\n");
-            fclose($file);
-        } else {
-            echo "<p>El log no tiene permisos de escritura.</p>";
-        }
-    } else {
-        echo "<p>El fichero LOG no existe</p>";
-    }
-}
-
-function obtenerLOG() {
-    $path = "../log/log.txt";
-    $file = fopen($path, "r") or exit("Imposible abrir el fichero!!");
-
-    $file_lines = count(file($path)); //Count the lines of a file
-    if ($file_lines > 0) {
-        ?>
-        <table class="rejilla">
-            <?php
-            $contador = 0;
-            while (!feof($file)) {
-                $contador++;
-                echo "<tr><td>" . $contador . "</td><td>" . fgets($file) . "</td></tr>";
-            }
-            ?>
-        </table>
-        <?php
-    } else {
-        echo "<p>No hay registros en el log :(</p>";
-    }
-}
-
-function borrarLOG() {
-    $path = "../log/log.txt";
-    $file = fopen($path, "w+") or exit("Imposible abrir el fichero!!");
-    fwrite($file, "");
-    fclose($file);
 }

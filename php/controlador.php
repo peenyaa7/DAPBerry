@@ -2,64 +2,48 @@
 
 session_start();
 include_once './utilities.php';
-include_once './funciones.php';
+include_once './AJAX_functions.php';
 
-if (isset($_REQUEST["accion"]))
-{
+if (isset($_REQUEST["accion"])) {
     $accion = $_REQUEST["accion"];
     $accion = strtolower($accion);
     $accion = str_replace(" ", "", $accion);
-    switch ($accion)
-    {
-        case "irapagina":
-            $_SESSION["nombrepagina"] = $_REQUEST["pagina"];
-            header("Location: principal.php");
-            break;
-        case "acceder":
-            $_SESSION["servidor"] = $_REQUEST["servidor"];
-            $_SESSION["cn"] = extraerCN($_REQUEST["usuario"]);
-            $_SESSION["basedn"] = extraerBaseDN($_REQUEST["dominio"]);
-            $_SESSION["clave"] = $_REQUEST["clave"];
 
-            if (conectar())
-            {
-                $_SESSION["nombrepagina"] = "home";
-                escribirLog("Inicio de sesión", "Info");
-                header("Location: principal.php");
-            }
-            else
-            {
-                escribirLog("No se pudo iniciar sesión", "Error");
-                header("Location: ../index.php");
-            }
-            break;
-        case "ajaxformulariounidadorganizativa":
-            $ruta = $_REQUEST["ruta"];
-            escribirLog("Petición AJAX al servidor (Formulario de unidad organizativa)", "Debug");
-            AJAXFormularioUnidadOrganizativa($ruta);
-            break;
-        case "ajaxagregarunidadorganizativa":
-            $conexion = conectar();
-            if ($conexion)
-            {
+    if ($accion == "acceder") {
+        escribirLog("Intentando iniciar sesión con las credenciales especificadas", "Debug");
+        $_SESSION["servidor"] = $_REQUEST["servidor"];
+        $_SESSION["cn"] = extraerCN($_REQUEST["usuario"]);
+        $_SESSION["basedn"] = extraerBaseDN($_REQUEST["dominio"]);
+        $_SESSION["clave"] = $_REQUEST["clave"];
+        if (conectar()) {
+            header("Location: ./principal.php");
+        } else {
+            header("Location: ../index.php");
+        }
+    }
+
+    $link_identifier = conectar();
+    if ($link_identifier) {
+        switch ($accion) {
+//            case "irapagina":
+//                $_SESSION["nombrepagina"] = $_REQUEST["pagina"];
+//                header("Location: principal.php");
+//                break;
+//            case "acceder":
+//                    header("Location: principal.php");
+//                break;
+            case "ajaxformulariounidadorganizativa":
+                $ruta = $_REQUEST["ruta"];
+                AJAXFormularioUnidadOrganizativa($ruta);
+                break;
+            case "ajaxagregarunidadorganizativa":
                 $ouUnidadOrganizativa = $_REQUEST["ouUnidadOrganizativa"];
                 $rutaPadre = $_REQUEST["ruta"];
-                escribirLog("Éxito al conectar al servidor LDAP al agregar una unidad organizativa", "Debug");
-                crearOU($conexion, $rutaPadre, $ouUnidadOrganizativa);
+                crearOU($link_identifier, $rutaPadre, $ouUnidadOrganizativa);
 
                 header("Location: principal.php?ruta=" . $rutaPadre);
-            }
-            else
-            {
-                escribirLog("No se pudo conectar al servidor LDAP al agregar una unidad organizativa", "Error");
-                header("Location: ./error.php");
-            }
-            ldap_close($conexion);
-            break;
-        case "ajaxagregarusuario":
-            $conexion = conectar();
-            if ($conexion)
-            {
+                break;
+            case "ajaxagregarusuario":
                 $uidUsuario = $_REQUEST["uidUsuario"];
                 $uidNombreComun = $_REQUEST["uidNombreComun"];
                 $uidCarpeta = $_REQUEST["uidCarpeta"];
@@ -67,28 +51,15 @@ if (isset($_REQUEST["accion"]))
                 $uidIDGrupo = $_REQUEST["uidIDGrupo"];
                 $uidPassword = $_REQUEST["uidPassword"];
                 $rutaPadre = $_REQUEST["ruta"];
-                escribirLog("Éxito al conectar al servidor LDAP al agregar un nuevo usuario", "Debug");
-                crearUID($conexion, $rutaPadre, $uidUsuario, $uidNombreComun, $uidCarpeta, $uidIDUsuario, $uidIDGrupo, $uidPassword);
-
+                crearUID($link_identifier, $rutaPadre, $uidUsuario, $uidNombreComun, $uidCarpeta, $uidIDUsuario, $uidIDGrupo, $uidPassword);
                 header("Location: principal.php?ruta=" . $rutaPadre);
-            }
-            else
-            {
-                escribirLog("No se pudo conectar al servidor LDAP al agregar un nuevo usuario", "Error");
-                header("Location: ./error.php");
-            }
-            ldap_close($conexion);
-            break;
-        case "ajaxinformacionaplicacion":
-            escribirLog("Petición AJAX al servidor LDAP (Información de la aplicación)", "Debug");
-            AJAXInformacionAplicacion();
-            break;
-        case "crearusuario":
-            $rutaPadre = $_REQUEST["ruta"];
-            $conexion = conectar();
-            if ($conexion)
-            {
-                // Atributos obligatorios
+                break;
+            case "ajaxinformacionaplicacion":
+                AJAXInformacionAplicacion();
+                break;
+            case "crearusuario":
+                $rutaPadre = $_REQUEST["ruta"];
+// Atributos obligatorios
                 $uidUsuario = $_REQUEST["uidUsuario"];
                 $uidNombreCompleto = $_REQUEST["uidNombreComun"];
                 $uidCarpeta = $_REQUEST["uidCarpeta"];
@@ -96,7 +67,7 @@ if (isset($_REQUEST["accion"]))
                 $uidIDGrupo = $_REQUEST["uidIDGrupo"];
                 $uidPassword = $_REQUEST["uidPassword"];
 
-                // Atributos opcionales
+// Atributos opcionales
                 $uidNombreCompleto = $_REQUEST["uidNombreCompleto"];
                 $uidCiudad = $_REQUEST["uidCiudad"];
                 $uidClaveExpiracion = $_REQUEST["uidClaveExpiracion"];
@@ -105,22 +76,14 @@ if (isset($_REQUEST["accion"]))
                 $ouClaveAviso = $_REQUEST["ouClaveAviso"];
                 $uidDescripcion = $_REQUEST["uidDescripcion"];
 
-                // Hay que añadir los opcionales a la funcion
+// Hay que añadir los opcionales a la funcion
 //                ciudad localityname
 //                gecos nombre full
-                escribirLog("Éxito al conectar al servidor LDAP para crear un nuevo usuario", "Debug");
-                crearUID($conexion, $rutaPadre, $uidUsuario, $uidNombreCompleto, $uidCarpeta, $uidIDUsuario, $uidIDGrupo, $uidPassword);
+                crearUID($link_identifier, $rutaPadre, $uidUsuario, $uidNombreCompleto, $uidCarpeta, $uidIDUsuario, $uidIDGrupo, $uidPassword);
 
                 header("Location: principal.php?accion=buscar&ruta=" . $rutaPadre);
-            }
-            else
-            {
-                escribirLog("No se pudo conectar al servidor LDAP para crear un nuevo usuario", "Error");
-                header("Location: ./error.php");
-            }
-            ldap_close($conexion);
-            break;
-        case "creardispositivo":
+                break;
+            case "creardispositivo":
 //            $rutaPadre = $_REQUEST["ruta"];
 //            $conexion = conectar();
 //            if ($conexion)
@@ -141,105 +104,58 @@ if (isset($_REQUEST["accion"]))
 //                header("Location: ./error.php");
 //            }
 //            ldap_close($conexion);
-            break;
-        case "ajaxformmodificaratributo":
-            $conexion = conectar();
-            if ($conexion)
-            {
-                escribirLog("Éxito al conectar al servidor LDAP para la petición AJAX del formulario de modificar atributo", "Debug");
+                break;
+            case "ajaxformmodificaratributo":
                 $dn = $_REQUEST["ruta"];
-                AJAXFormModificarAtributo($conexion, $dn);
-            }
-            else
-            {
-                escribirLog("No se pudo conectar al servidor LDAP para la petición AJAX del formulario de modificar atributo", "Error");
-                header("Location: ./error.php");
-            }
-            ldap_close($conexion);
-            break;
-        case "ajaxmodificaratributo":
-            $conexion = conectar();
-            if ($conexion)
-            {
+                AJAXFormModificarAtributo($link_identifier, $dn);
+                break;
+            case "ajaxmodificaratributo":
                 $atributo = $_REQUEST["atributo"];
                 $contenidoAtributo = $_REQUEST["contenidoAtributo"];
                 $ruta = $_REQUEST["ruta"];
-                escribirLog("Éxito al conectar al servidor LDAP para modificar un atributo", "Debug");
-                AJAXModificarAtributo($conexion, $ruta, $atributo, $contenidoAtributo);
-            }
-            else
-            {
-                escribirLog("No se pudo conectar al servidor LDAP para modificar un atributo", "Error");
-            }
-            break;
-            ldap_close($conexion);
-        case "ajaxformagregaratributo":
-            escribirLog("Petición AJAX para el formulario de agregar un atributo", "Debug");
-            AJAXFormAgregarAtributo();
-            break;
-        case "ajaxagregaratributo":
-            $conexion = conectar();
-            if ($conexion) {
+                AJAXModificarAtributo($link_identifier, $ruta, $atributo, $contenidoAtributo);
+                break;
+            case "ajaxformagregaratributo":
+                AJAXFormAgregarAtributo();
+                break;
+            case "ajaxagregaratributo":
                 $atributo = $_REQUEST["atributo"];
                 $contenidoAtributo = $_REQUEST["contenidoAtributo"];
                 $ruta = $_REQUEST["ruta"];
-                escribirLog("Éxito al conectar al servidor LDAP al hacer la petición AJAX para agregar un atributo", "Debug");
-                AJAXAgregarAtributo($conexion, $ruta, $atributo, $contenidoAtributo);
-            }
-            break;
-
-        case "ajaxcontenidoentrada":
-            escribirLog("Petición AJAX para el contenido del arbol LDAP", "Debug");
-            AJAXContenidoArbol();
-            break;
-        case "ajaxinformacionentrada":
-            // Primero me conecto
-            $conexion = conectar();
-            if ($conexion)
-            {
+                AJAXAgregarAtributo($link_identifier, $ruta, $atributo, $contenidoAtributo);
+                break;
+            case "ajaxcontenidoentrada":
+                AJAXContenidoArbol($link_identifier);
+                break;
+            case "ajaxinformacionentrada":
                 $ruta = $_REQUEST["ruta"];
-                escribirLog("Éxito al conectar al servidor LDAP al hacer la petición AJAX para la información de una entrada (".$ruta.")", "Debug");
-                AJAXInformacionEntrada($conexion, $ruta);
-            }
-            else
-            {
-                escribirLog("No se pudo conectar al servidor LDAP al hacer la petición AJAX para la información de una entrada", "Error");
-            }
-            // Cerramos la conexion
-            ldap_close($conexion);
-            break;
-        case "ajaxeliminarentrada":
-            $ruta = $_POST["ruta"];
-            $conexion = conectar();
-            if ($conexion)
-            {
-                escribirLog("Éxito al conectar al servidor LDAP al hacer una petición AJAX para eliminar una entrada (".$ruta.")", "Debug");
-                eliminarEntrada($conexion, $ruta);
+                AJAXInformacionEntrada($link_identifier, $ruta);
+                break;
+            case "ajaxeliminarentrada":
+                $ruta = $_POST["ruta"];
+                AJAXEliminarEntrada($link_identifier, $ruta);
 //                $rutaPadre = rutaPadre($ruta);
 //                header("Location: principal.php?accion=buscar&ruta=" . $rutaPadre);
-            }
-            else
-            {
-                escribirLog("No se pudo conectar al servidor LDAP al hacer una petición AJAX para eliminar una entrada (".$ruta.")", "Error");
-                header("Location: ./error.php");
-            }
-            ldap_close($conexion);
-            break;
-        case "ajaxobtenerlistaservidores":
-            AJAXObtenerListaServidores();
-            break;
-        case "obtenerlog":
-            obtenerLOG();
-            break;
-        case "borrarlog":
-            escribirLog("Borrado del log", "Info");
-            borrarLOG();
-            break;
-        default:
-            escribirLog("El destino no está especificado en el archivo 'controlador.php' y no puede redirigir correctamente", "Error");
+                break;
+            case "ajaxobtenerlistaservidores":
+                AJAXObtenerListaServidores();
+                break;
+            case "obtenerlog":
+                obtenerLOG();
+                break;
+            case "borrarlog":
+                borrarLOG();
+                break;
+            case "listar":
+                $ruta = $_REQUEST["ruta"];
+                listar($link_identifier, $ruta);
+                break;
+            default:
+                escribirLog("El destino no está especificado en el archivo 'controlador.php' y no puede redirigir correctamente", "Error");
+        }
     }
-}
-else
-{
+    ldap_close($link_identifier);
+} else {
     escribirLog("No está especificada la variable superglobal 'accion'", "Error");
+    header("Location: ./error.php");
 }
