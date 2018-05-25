@@ -266,7 +266,6 @@ function crearUID($link_identifier, $rutaPadre, $uidUsuario, $uidNombreComun, $u
 //    checkeo($ldap_conexion);
 //    ldap_unbind($ldap_conexion);
 //}
-
 //function crearDispositivo($cn) {
 //    $conexion = conectar();
 //    if ($conexion) {
@@ -317,9 +316,13 @@ function agregarEntradasUnNivel($link_identifier, $rutaPadre) {
     }
 }
 
-
 function listar($link_identifier, $rutaPadre) {
-    $ruta = $rutaPadre;
+
+
+    $ruta = $_REQUEST["ruta"];
+    ?>
+    <h1><?php echo $_REQUEST["ruta"] ?></h1>
+    <?php
     $filtro = "(|(uid=*)(cn=*)(ou=*)(objectClass=*)(uniquemember=*)(o=*))";
     $resultados = ldap_list($link_identifier, $ruta, $filtro);
     $entries = ldap_get_entries($link_identifier, $resultados);
@@ -332,14 +335,13 @@ function listar($link_identifier, $rutaPadre) {
                     <th></th>
                 </tr>
             </thead>
-            <tbody><?php
-                for ($i = 0; $i < $entries["count"]; $i++) {
-                    ?>
+            <tbody><?php for ($i = 0; $i < $entries["count"]; $i++) {
+            ?>
                     <tr dn="<?php echo $entries[$i]["dn"] ?>">
                         <td><?php echo $entries[$i]["dn"] ?></td>
                         <td>
                             <i class="material-icons button info" id="infoEntrada" onclick="informacionEntrada(this)">info</i>
-                            <i class="material-icons button edit" id="editarEntrada" onclick="">edit</i>
+                            <i class="material-icons button edit" id="editarEntrada" onclick="modificarEntrada(this)">edit</i>
                             <i class="material-icons button delete" id="eliminarEntrada" onclick="eliminarEntrada(this)">delete</i>
                         </td>
                     </tr><?php } ?>
@@ -355,4 +357,21 @@ function listar($link_identifier, $rutaPadre) {
         echo "<p>¿Crear una?</p>";
     }
     ldap_free_result($resultados);
+    ?>
+    <button class="btn btn-success" id="nuevaEntrada" onclick="nuevaEntrada('<?php echo $ruta ?>')"><i class="material-icons">add_box</i> Nueva entrada</button>
+    <!--</div>-->
+    <!--<div class="clear"></div>-->
+
+
+
+
+<?php
+
+
+
+
+
+
+
+
 }

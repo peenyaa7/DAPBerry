@@ -604,7 +604,7 @@ function modificarEntradaNuevoAtributo(dn) {
                 type: "POST",
                 url: "../php/controlador.php",
                 data: {
-                    accion: "ajaxformagregaratributo",
+                    accion: "ajaxformagregaratributo"
 //                    ruta: dn
                 }
             }).done(function (response) {
