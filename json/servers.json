@@ -10,17 +10,7 @@
             "usuario": "ro_admin.sysadmins",
             "clave": "zflexpass"
         }, {
-            "servidor": "192.168.5.41",
-            "dominio": "francisco.com",
-            "usuario": "admin",
-            "clave": ""
-        }, {
-            "servidor": "172.17.23.159",
-            "dominio": "francisco.com",
-            "usuario": "admin",
-            "clave": ""
-        }, {
-            "servidor": "172.17.23.218",
+            "servidor": "10.100.64.164",
             "dominio": "dapberry.com",
             "usuario": "admin",
             "clave": ""

@@ -26,87 +26,68 @@ if (isset($_REQUEST["accion"])) {
         $link_identifier = conectar();
         if ($link_identifier) {
             switch ($accion) {
-//            case "irapagina":
-//                $_SESSION["nombrepagina"] = $_REQUEST["pagina"];
-//                header("Location: principal.php");
-//                break;
-//            case "acceder":
-//                    header("Location: principal.php");
-//                break;
-                case "ajaxformulariounidadorganizativa":
-                    AJAX_formularioUnidadOrganizativa($_REQUEST["ruta"]);
-                    break;
+                // Cases organizational unit
+//                case "ajaxformulariounidadorganizativa":
+//                    AJAX_formularioUnidadOrganizativa($_REQUEST["ruta"]);
+//                    break;
                 case "ajaxagregarunidadorganizativa":
-                    crearOU($link_identifier, $_REQUEST["ruta"], $_REQUEST["ouUnidadOrganizativa"]);
+                    // add organizational unit
+                    AJAX_crearOU($link_identifier, $_REQUEST["ruta"], $_REQUEST["ouUnidadOrganizativa"]);
                     header("Location: principal.php?ruta=" . $rutaPadre);
                     break;
                 case "ajaxagregarusuario":
-                    crearUID($link_identifier, $_REQUEST["ruta"], $_REQUEST["uidUsuario"], $_REQUEST["uidNombreComun"], $_REQUEST["uidCarpeta"], $_REQUEST["uidIDUsuario"], $_REQUEST["uidIDGrupo"], $_REQUEST["uidPassword"]);
+                    // add user
+                    AJAX_crearUID($link_identifier, $_REQUEST["ruta"], $_REQUEST["uidUsuario"], $_REQUEST["uidNombreComun"], $_REQUEST["uidCarpeta"], $_REQUEST["uidIDUsuario"], $_REQUEST["uidIDGrupo"], $_REQUEST["uidPassword"]);
                     header("Location: principal.php?ruta=" . $rutaPadre);
                     break;
                 case "ajaxinformacionaplicacion":
+                    // information of application
                     AJAX_informacionAplicacion();
                     break;
-//                case "crearusuario":
-//                    $path = $_REQUEST["ruta"];
-//// Atributos obligatorios
-//                    $uidUsuario = $_REQUEST["uidUsuario"];
-//                    $uidNombreCompleto = $_REQUEST["uidNombreComun"];
-//                    $uidCarpeta = $_REQUEST["uidCarpeta"];
-//                    $uidIDUsuario = $_REQUEST["uidIDUsuario"];
-//                    $uidIDGrupo = $_REQUEST["uidIDGrupo"];
-//                    $uidPassword = $_REQUEST["uidPassword"];
-//
-//// Atributos opcionales
-//                    $uidNombreCompleto = $_REQUEST["uidNombreCompleto"];
-//                    $uidCiudad = $_REQUEST["uidCiudad"];
-//                    $uidClaveExpiracion = $_REQUEST["uidClaveExpiracion"];
-//                    $uidClaveMax = $_REQUEST["uidClaveMax"];
-//                    $uidClaveMin = $_REQUEST["uidClaveMin"];
-//                    $ouClaveAviso = $_REQUEST["ouClaveAviso"];
-//                    $uidDescripcion = $_REQUEST["uidDescripcion"];
-//
-//// Hay que añadir los opcionales a la funcion
-////                ciudad localityname
-////                gecos nombre full
-//                    crearUID($link_identifier, $path, $uidUsuario, $uidNombreCompleto, $uidCarpeta, $uidIDUsuario, $uidIDGrupo, $uidPassword);
-//
-//                    header("Location: principal.php?accion=buscar&ruta=" . $rutaPadre);
-//                    break;
                 case "ajaxagregardispositivo":
-                    crearCN($link_identifier, $_REQUEST["ruta"], $_REQUEST["cnNombre"]);
+                    // add device
+                    AJAX_crearCN($link_identifier, $_REQUEST["ruta"], $_REQUEST["cnNombre"]);
                     header("Location: principal.php?accion=buscar&ruta=" . $rutaPadre);
+                    break;
                 case "ajaxformmodificaratributo":
+                    // form to modify attribute
                     AJAX_formModificarAtributo($link_identifier, $_REQUEST["ruta"]);
                     break;
                 case "ajaxmodificaratributo":
+                    // modify attribute
                     AJAX_modificarAtributo($link_identifier, $_REQUEST["ruta"], $_REQUEST["atributo"], $_REQUEST["contenidoAtributo"]);
                     break;
                 case "ajaxformagregaratributo":
+                    // form to add attribute
                     AJAX_formAgregarAtributo();
                     break;
                 case "ajaxagregaratributo":
+                    // add attribute
                     AJAX_agregarAtributo($link_identifier, $_REQUEST["ruta"], $_REQUEST["atributo"], $_REQUEST["contenidoAtributo"]);
                     break;
                 case "ajaxcontenidoentrada":
+                    // tree content
                     AJAX_contenidoArbol($link_identifier);
                     break;
                 case "ajaxinformacionentrada":
+                    // entry information 
                     AJAX_informacionEntrada($link_identifier, $_REQUEST["ruta"]);
                     break;
                 case "ajaxeliminarentrada":
+                    // delete entry
                     AJAX_eliminarEntrada($link_identifier, $_REQUEST["ruta"]);
-//                $rutaPadre = rutaPadre($ruta);
-//                header("Location: principal.php?accion=buscar&ruta=" . $rutaPadre);
                     break;
                 case "obtenerlog":
+                    // get LOG
                     obtenerLOG();
                     break;
                 case "borrarlog":
+                    // delete LOG
                     borrarLOG();
                     break;
                 case "listar":
-                    listar($link_identifier, $_REQUEST["ruta"]);
+                    // list content
+                    AJAX_listar($link_identifier, $_REQUEST["ruta"]);
                     break;
                 default:
                     escribirLog("El destino no está especificado en el archivo 'controlador.php' y no puede redirigir correctamente", "Error");

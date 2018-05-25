@@ -1,6 +1,6 @@
 <?php
 
-function after($substr, $str) {
+function despues($substr, $str) {
     if (!is_bool(strpos($str, $substr))) {
         return substr($str, strpos($str, $substr) + strlen($substr));
     }
@@ -11,11 +11,7 @@ function before($substr, $str) {
 }
 
 function between($firstsubstr, $secondsubstr, $str) {
-    return before($secondsubstr, after($firstsubstr, $str));
-}
-
-function rutaPadre($ruta) {
-    return after(",", $ruta);
+    return before($secondsubstr, despues($firstsubstr, $str));
 }
 
 function extraerCN($usuario) {
@@ -42,17 +38,4 @@ function extraerBaseDN($dominioCompleto) {
         $baseDN = $baseDN . ",dc=" . $todosLosDominios[$i];
     }
     return substr($baseDN, 1); // Me elimina el "," del principio
-}
-
-function error() {
-    header("Location: ./error.php");
-}
-
-function checkeo($link_identifier) {
-    if (ldap_errno($link_identifier) > 0) {
-        echo "<hr>";
-        echo "Se ha producido un error.<br>";
-        echo "ERROR --> " . ldap_error($link_identifier);
-        echo "<hr>";
-    }
 }

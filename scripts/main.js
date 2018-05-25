@@ -296,7 +296,7 @@ function nuevaEntrada(rutaPadre) {
             cn: {
                 text: "Otro...",
                 action: function () {
-                    nuevaEntradaOtro(rutaPadre);
+                    nuevaEntradaDispositivo(rutaPadre);
                 }
             },
             cancelar: {

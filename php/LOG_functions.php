@@ -1,6 +1,6 @@
 <?php
 
-function escribirLog($cadena, $type) {
+function escribirLog($definitionError, $typeError) {
     /*
      * Types of errors
      * - Info -----> 'Things happen'
@@ -26,12 +26,12 @@ function escribirLog($cadena, $type) {
 //        echo "el fichero existe";
         if (is_writable($path)) {
 //            echo "el fichero es writable";
-            $fechaLog = "[" . date("Y-m-d H:i:s") . "]";
-            $serverLog = "[" . $server . "]";
-            $userLog = "[" . $user . "]";
-            $typeLog = "[" . $type . "]";
+            $logDate = "[" . date("Y-m-d H:i:s") . "]";
+            $logServer = "[" . $server . "]";
+            $logUser = "[" . $user . "]";
+            $logType = "[" . $typeError . "]";
             $file = fopen($path, "a+"); // El modo 'a+' es para apertura para escritura y lectura, tambien coloca el puntero al final del fichero.
-            fwrite($file, $cadena . " < " . $typeLog . $userLog . $serverLog . $fechaLog);
+            fwrite($file, $definitionError . " < " . $logType . $logUser . $logServer . $logDate);
             fwrite($file, "\n");
             fclose($file);
         } else {
@@ -43,18 +43,18 @@ function escribirLog($cadena, $type) {
 }
 
 function obtenerLOG() {
-    $path = "../log/log.txt";
-    $file = fopen($path, "r") or exit("Imposible abrir el fichero!!");
+    $absolutePath = "../log/log.txt";
+    $file = fopen($absolutePath, "r") or exit("Imposible abrir el fichero!!");
 
-    $file_lines = count(file($path)); //Count the lines of a file
+    $file_lines = count(file($absolutePath)); //Count the lines of a file
     if ($file_lines > 0) {
         ?>
         <table class="rejilla">
             <?php
-            $contador = 0;
+            $counter = 0;
             while (!feof($file)) {
-                $contador++;
-                echo "<tr><td>" . $contador . "</td><td>" . fgets($file) . "</td></tr>";
+                $counter++;
+                echo "<tr><td>" . $counter . "</td><td>" . fgets($file) . "</td></tr>";
             }
             ?>
         </table>
