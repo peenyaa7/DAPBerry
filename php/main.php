@@ -53,11 +53,12 @@ include_once './utils.php';
                                 ¡Bienvenido!
                             </div>
                             <div id="contenido">
-                                <p>Hola <span class="destacarspan"><?php echo after("=",$_SESSION["cn"]) ?></span>, estás en la aplicacion web de Gestion de LDAP</p>
-                                <p>A la izquierda puedes ver tu tarjeta de usuario donde puedes ver quien eres (por si lo olvidas), y
-                                    un arbol donde se muestra el arbol LDAP asociado a esta cuenta.</p>
-                                <p>Arriba puedes disfrutar de las diferentes funcionalidades que la pagina ofrece.</p>
-                                <p>Disfruta y en caso de donacion o querer mas informacion, pinche en 'Info'.</p>
+                                <p>Hola <span class="destacarspan"><?php echo after("=",$_SESSION["cn"]) ?></span>, bienvenido a DAPBerry, una aplicación web sencilla para la gestión de cualquier servidor OpenLDAP</p>
+                                <p>A la izquierda puedes ver tu tarjeta de usuario, donde te da información sobre que usuario eres, en que dominio estás y a que servidor estas conectado, y
+                                    más abajo, un árbol donde se muestra el árbol LDAP asociado a esta cuenta.</p>
+                                <p>Si pinchas en la ayuda, puedes ver la información de la aplicación, una guía de referencia rápida de LDAP (muy útil para cuando no te acuerdas de algo), un manual de usuario en formato PDF (para que sepas dar
+                                    tus primeros pasos dentro de DAPBerry) y un cuadro de diálogo donde se muestra el LOG a tiempo real (por si la aplicación falla en algún momento, puedas ir al LOG y detectarlo facilmente).</p>
+                                <p>Disfrute de DAPBerry mientras está en fase de desarrollo y en caso de querer aportar algun tipo de donación o ayuda, contacte con nosotros (la información la tienes en la ayuda)</p>
                             </div>
                             <div class="clear"></div>
                         <?php
