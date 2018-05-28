@@ -133,8 +133,8 @@ function AJAX_eliminarEntrada($link_identifier, $dn) {
 
 function AJAX_eliminarAtributo($link_identifier, $dn, $attribute) {
     escribirLog("Petición AJAX (Eliminar atributo)", "Debug");
-    $data[$attribute] = array();
-    $result = ldap_mod_del($link_identifier, $dn, $data);
+//    $data[$attribute] = array();
+    $result = ldap_mod_del($link_identifier, $dn, $data[$attribute]);
     if ($result) {
         escribirLog("Se ha eliminado el atributo correctamente", "Info");
     } else {
