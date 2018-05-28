@@ -131,6 +131,56 @@ function AJAX_eliminarEntrada($link_identifier, $dn) {
     return $boolean;
 }
 
+function AJAX_eliminarAtributo($link_identifier, $dn, $attribute) {
+    escribirLog("Petición AJAX (Eliminar atributo)", "Debug");
+    $data[$attribute] = array();
+    $result = ldap_mod_del($link_identifier, $dn, $data);
+    if ($result) {
+        escribirLog("Se ha eliminado el atributo correctamente", "Info");
+    } else {
+        escribirLog("Error al eliminar el atributo"
+                . "\nNúmero error: " . ldap_errno($link_identifier)
+                . "\nError: " . ldap_error($link_identifier), "Error");
+//        alert("Algun error en la funcion 'AJAXModificarAtributo'");
+    }
+    ldap_free_result($result);
+}
+
+function AJAX_formEliminarAtributo($link_identifier, $dn) {
+    escribirLog("Petición AJAX (Formulario para modificar atributo)", "Debug");
+    ?>
+    <form>
+        <?php
+        // El filtro es el RDN del DN
+        $filter = before(",", $dn);
+        // La ruta padre es todo lo demas
+        $path = after(",", $dn);
+        // Buscamos en todo el arbol LDAP dicho objeto
+        $result = ldap_search($link_identifier, $path, $filter);
+        // Obtenemos la primera entrada encontrada
+        $entry = ldap_first_entry($link_identifier, $result);
+        // Obtenemos el primer atributo de la primera entrada encontrada
+        $attribute = ldap_first_attribute($link_identifier, $entry);
+        echo "<select id='selector'>";
+        // Por cada atributo obtengo el valor y lo escribo
+        while ($attribute) {
+            $values = ldap_get_values($link_identifier, $entry, $attribute);
+//            $contador = 0;
+            for ($i = 0; $i < $values["count"]; $i++) {
+                if ($attribute != "objectClass") {
+                    echo "<option value='$attribute'>" . $attribute . " --> " . $values[$i] . "</option>";
+                }
+            }
+            $attribute = ldap_next_attribute($link_identifier, $entry);
+        }
+        echo "</select>";
+//        echo "<br><input type='text' placeholder='Nuevo contenido' id='contenidoAtributo'>";
+        // Liberamos los resultados para recuperar memoria
+        ldap_free_result($result);
+        ?>
+    </form>
+    <?php
+}
 
 // OTHERS
 function AJAX_informacionEntrada($link_identifier, $dn) {

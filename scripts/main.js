@@ -636,7 +636,7 @@ function modificarEntrada(boton) {
             cancel: {
                 text: "Cancelar",
                 action: function () {
-                    // Nada
+                    // nothing
                 }
             }
         }
@@ -684,8 +684,7 @@ function modificarEntradaNuevoAtributo(dn) {
                         }
                     }).done(function (response) {
                         alert(response);
-                        // Habria que poner ruta padre en vez de dn
-                        peticionAJAXContenido(dn);
+                        peticionAJAXContenido(path(dn));
                         peticionAJAXArbol();
                     }).fail(function () {
                         window.location = "../php/error.php";
@@ -752,8 +751,7 @@ function modificarEntradaModificarAtributo(dn) {
                         }
                     }).done(function (response) {
                         alert(response);
-                        // Habria que poner ruta padre en vez de dn
-                        peticionAJAXContenido(dn);
+                        peticionAJAXContenido(path(dn));
                         peticionAJAXArbol();
                     }).fail(function () {
                         window.location = "../php/error.php";
@@ -779,11 +777,76 @@ function modificarEntradaModificarAtributo(dn) {
 }
 
 function modificarEntradaEliminarAtributo(dn) {
+    $.confirm({
+        title: "Eliminar un atributo de <span class='destacarspan'>" + dn + "</span>",
+        theme: 'supervan',
+//        columClass: "xlarge",
+        content: function () {
+            var self = this;
+            return $.ajax({
+                type: "POST",
+                url: "../php/controller.php",
+                data: {
+                    accion: "ajaxformeliminaratributo",
+                    dn: dn
+                }
+            }).done(function (response) {
+                self.setContentAppend(response);
+            }).fail(function () {
+                self.setContentAppend("<p>Algun error con la peticion AJAX</p>");
+            });
+        },
+        buttons: {
+            formSubmit: {
+                text: 'Eliminar atributo!',
+                btnClass: 'btn-blue',
+                action: function () {
+                    var attribute = this.$content.find("#selector").val();
+                    if (!attribute) {
+                        $.alert('Elige un atributo');
+                        return false;
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "../php/controller.php",
+                        data: {
+                            accion: "ajaxeliminaratributo",
+                            attribute: attribute,
+                            dn: dn
+                        }
+                    }).done(function (response) {
+                        alert(response);
+                        peticionAJAXContenido(path(dn));
+                        peticionAJAXArbol();
+                    }).fail(function () {
+                        window.location = "../php/error.php";
+                    });
 
+
+                }
+            },
+            cancel: function () {
+                //close
+            }
+        },
+        onContentReady: function () {
+            // bind to events
+            var self = this;
+            this.$content.find('form').on('submit', function (event) {
+                // if the user submits the form by pressing enter in the field.
+                event.preventDefault();
+                self.$$formSubmit.trigger('click'); // reference the button and click it
+            });
+        }
+    });
+}
+
+function path(dn) {
+    return dn.substr(dn.indexOf(",") + 1);
 }
 
 function eliminarEntrada(button) {
-    var dn = button.parentNode.parentNode.getAttribute("dn");
+    var dn = button.getAttribute("dn");
     $.confirm({
         title: dn,
         content: '¿Estás seguro de eliminar la entrada y todo su contenido?',
@@ -805,8 +868,7 @@ function eliminarEntrada(button) {
                             dn: dn
                         }
                     }).done(function () {
-                        var dnPadre = dn.substr(dn.indexOf(",") + 1);
-                        peticionAJAXContenido(dnPadre);
+                        peticionAJAXContenido(path(dn));
                         peticionAJAXArbol();
                     }).fail(function () {
                         alert("no lo he conseguido");

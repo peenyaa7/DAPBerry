@@ -28,18 +28,13 @@ if (isset($_REQUEST["accion"])) {
         if ($link_identifier) {
             switch ($accion) {
                 // Cases organizational unit
-//                case "ajaxformulariounidadorganizativa":
-//                    AJAX_formularioUnidadOrganizativa($_REQUEST["ruta"]);
-//                    break;
                 case "ajaxagregarunidadorganizativa":
                     // add organizational unit
                     AJAX_crearOU($link_identifier, $_REQUEST["path"], $_REQUEST["ouUnidadOrganizativa"]);
-//                    header("Location: main.php?ruta=" . $rutaPadre);
                     break;
                 case "ajaxagregarusuario":
                     // add user
                     AJAX_crearUID($link_identifier, $_REQUEST["path"], $_REQUEST["uidUsuario"], $_REQUEST["uidNombreComun"], $_REQUEST["uidCarpeta"], $_REQUEST["uidIDUsuario"], $_REQUEST["uidIDGrupo"], $_REQUEST["uidPassword"]);
-//                    header("Location: main.php?ruta=" . $rutaPadre);
                     break;
                 case "ajaxinformacionaplicacion":
                     // information of application
@@ -48,7 +43,6 @@ if (isset($_REQUEST["accion"])) {
                 case "ajaxagregardispositivo":
                     // add device
                     AJAX_crearCN($link_identifier, $_REQUEST["path"], $_REQUEST["cnNombre"]);
-//                    header("Location: main.php?accion=buscar&ruta=" . $rutaPadre);
                     break;
                 case "ajaxformmodificaratributo":
                     // form to modify attribute
@@ -65,6 +59,12 @@ if (isset($_REQUEST["accion"])) {
                 case "ajaxagregaratributo":
                     // add attribute
                     AJAX_agregarAtributo($link_identifier, $_REQUEST["dn"], $_REQUEST["atributo"], $_REQUEST["contenidoAtributo"]);
+                    break;
+                case "ajaxformeliminaratributo":
+                    AJAX_formEliminarAtributo($link_identifier, $_REQUEST["dn"]);
+                    break;
+                case "ajaxeliminaratributo":
+                    AJAX_eliminarAtributo($link_identifier, $_REQUEST["dn"], $_REQUEST["attribute"]);
                     break;
                 case "ajaxcontenidoentrada":
                     // tree content
