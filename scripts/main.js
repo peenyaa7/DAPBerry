@@ -8,18 +8,18 @@ function inicializar() {
     inicializarDialogos();
     peticionAJAXArbol();
     asignarEventos();
-    $("#contenidoBuscar").tabs();
+//    $("#contenidoBuscar").tabs();
     $(".rejilla").tablesorter();
     inicializarTerminal();
 }
 
 function inicializarTerminal() {
-    $("#terminal").append("<div id='terminalResizable'><iframe src='https://"+window.location.host+":3001' id='iframeTerminal'>Cargando terminal...</iframe></div>");
+    $("#terminal").append("<div id='terminalResizable'><iframe src='https://" + window.location.host + ":3001' id='iframeTerminal'>Cargando terminal...</iframe></div>");
 }
 
-function mostrarTerminal() {
-    var buttonTerminal = $("#switchTerminal").on
-}
+//function mostrarTerminal() {
+//    var buttonTerminal = $("#switchTerminal").on
+//}
 
 function asignarEventos() {
     $("#TUSalir").click(function () {
@@ -31,12 +31,12 @@ function asignarEventos() {
     $("#TUAyuda").click(function () {
         dialogoManual();
     });
-    $("#switchTerminal").click(function() {
-	$("#iframeTerminal").toggle();
-	$("#refreshTerminal").toggle();
+    $("#switchTerminal").click(function () {
+        $("#iframeTerminal").toggle();
+        $("#refreshTerminal").toggle();
     });
-    $("#refreshTerminal").click(function() {
-	document.getElementById("iframeTerminal").src+='';
+    $("#refreshTerminal").click(function () {
+        document.getElementById("iframeTerminal").src += '';
     });
 }
 
@@ -118,15 +118,15 @@ function dialogoManual() {
                 }
             },
             manualldap: {
-                text: "Manual LDAP",
+                text: "Guía de referencia LDAP",
                 action: function () {
-                    window.open("../php/manual.php", "Manual LDAP", "width=800, height=500");
+                    window.open("../php/LDAP_reference.php", "Guía de referencia LDAP", "width=800, height=500");
                 }
             },
             manualapp: {
-                text: "Manual de la aplicación (falta abrir pdf)",
+                text: "Manual DAPBerry",
                 action: function () {
-                    //Abrir PDF
+                    window.open("../trash/documentodeprueba.pdf");
                 }
             },
             verlog: {
@@ -158,6 +158,7 @@ function listarLog() {
                 }
             }).done(function (response) {
                 self.setContentAppend(response);
+                $(".rejilla").tablesorter();
             }).fail(function () {
                 self.setContentAppend("<p>Algun error con la peticion AJAX</p>");
             });
@@ -246,6 +247,7 @@ function peticionAJAXContenido(ruta) {
     }).done(function (response) {
         $("#contentSpinnerLoading").css("display", "none");
         $("#contenido").html(response);
+        $(".rejilla").tablesorter();
     });
 }
 
@@ -595,6 +597,7 @@ function informacionEntrada(button) {
                 }
             }).done(function (response) {
                 self.setContentAppend(response);
+                $(".rejilla").tablesorter();
             }).fail(function () {
                 self.setContentAppend("<p>Algun error con la peticion AJAX</p>");
             });

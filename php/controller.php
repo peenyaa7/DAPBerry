@@ -16,7 +16,7 @@ if (isset($_REQUEST["accion"])) {
         $_SESSION["basedn"] = extraerBaseDN($_REQUEST["dominio"]);
         $_SESSION["clave"] = $_REQUEST["clave"];
         if (conectar()) {
-            header("Location: ./principal.php");
+            header("Location: ./main.php");
         } else {
             header("Location: ../index.php");
         }
@@ -33,12 +33,12 @@ if (isset($_REQUEST["accion"])) {
                 case "ajaxagregarunidadorganizativa":
                     // add organizational unit
                     AJAX_crearOU($link_identifier, $_REQUEST["ruta"], $_REQUEST["ouUnidadOrganizativa"]);
-                    header("Location: principal.php?ruta=" . $rutaPadre);
+//                    header("Location: main.php?ruta=" . $rutaPadre);
                     break;
                 case "ajaxagregarusuario":
                     // add user
                     AJAX_crearUID($link_identifier, $_REQUEST["ruta"], $_REQUEST["uidUsuario"], $_REQUEST["uidNombreComun"], $_REQUEST["uidCarpeta"], $_REQUEST["uidIDUsuario"], $_REQUEST["uidIDGrupo"], $_REQUEST["uidPassword"]);
-                    header("Location: principal.php?ruta=" . $rutaPadre);
+//                    header("Location: main.php?ruta=" . $rutaPadre);
                     break;
                 case "ajaxinformacionaplicacion":
                     // information of application
@@ -47,7 +47,7 @@ if (isset($_REQUEST["accion"])) {
                 case "ajaxagregardispositivo":
                     // add device
                     AJAX_crearCN($link_identifier, $_REQUEST["ruta"], $_REQUEST["cnNombre"]);
-                    header("Location: principal.php?accion=buscar&ruta=" . $rutaPadre);
+//                    header("Location: main.php?accion=buscar&ruta=" . $rutaPadre);
                     break;
                 case "ajaxformmodificaratributo":
                     // form to modify attribute

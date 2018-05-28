@@ -1,70 +1,115 @@
 <?php
 include_once './LOG_functions.php';
-/* FUNCIONES AJAX */
+/* AJAX FUNCTIONS */
 
-function AJAX_informacionEntrada($conexion, $ruta) {
-    escribirLog("Petición AJAX (Información de entrada)", "Debug");
-    // El filtro es el RDN del DN
-    $filtro = before(",", $ruta);
-    // La ruta padre es todo lo demas
-    $rutaPadre = after(",", $ruta);
-    // Buscamos en todo el arbol LDAP dicho objeto
-    $resultados = ldap_search($conexion, $rutaPadre, $filtro);
-    // Obtenemos la primera entrada encontrada
-    $entrada = ldap_first_entry($conexion, $resultados);
-    // Obtenemos el primer atributo de la primera entrada encontrada
-    $atributo = ldap_first_attribute($conexion, $entrada);
-    echo "<table class='rejilla'>";
-    // Por cada atributo obtengo el valor y lo escribo
-    while ($atributo) {
-        $valor = ldap_get_values($conexion, $entrada, $atributo);
-        for ($i = 0; $i < $valor["count"]; $i++) {
-            echo "<tr><td>" . $atributo . "</td><td>" . $valor[$i] . "</td></tr>";
-        }
-        $atributo = ldap_next_attribute($conexion, $entrada);
+// ADD
+function AJAX_crearOU($link_identifier, $path, $ouName) {
+    escribirLog("Creación de unidad organizativa...", "Debug");
+
+    $data["objectClass"][0] = "top";
+    $data["objectClass"][1] = "organizationalUnit";
+    $data["ou"] = $ouName;
+
+    $dn = "ou=" . $ouName . "," . $path;
+    $result = ldap_add($link_identifier, $dn, $data);
+
+    if ($result) {
+        escribirLog("Se ha creado la unidad organizativa '$dn' correctamente", "Info");
+    } else {
+        escribirLog("Error al crear la unidad organizativa '" . $dn . "'"
+                . "\nNúmero error: " . ldap_errno($link_identifier)
+                . "\nError: " . ldap_error($link_identifier), "Error");
     }
-    echo "</table>";
 
-    // Liberamos los resultados para recuperar memoria
-    ldap_free_result($resultados);
+    ldap_free_result($result);
 }
 
-function AJAX_formModificarAtributo($conexion, $dn) {
-    escribirLog("Petición AJAX (Formulario para modificar atributo)", "Debug");
-    ?>
-    <form>
-        <?php
-        // El filtro es el RDN del DN
-        $filtro = before(",", $dn);
-        // La ruta padre es todo lo demas
-        $rutaPadre = after(",", $dn);
-        // Buscamos en todo el arbol LDAP dicho objeto
-        $resultados = ldap_search($conexion, $rutaPadre, $filtro);
-        // Obtenemos la primera entrada encontrada
-        $entrada = ldap_first_entry($conexion, $resultados);
-        // Obtenemos el primer atributo de la primera entrada encontrada
-        $atributo = ldap_first_attribute($conexion, $entrada);
-        echo "<select id='selector'>";
-        // Por cada atributo obtengo el valor y lo escribo
-        while ($atributo) {
-            $valor = ldap_get_values($conexion, $entrada, $atributo);
-//            $contador = 0;
-            for ($i = 0; $i < $valor["count"]; $i++) {
-                if ($atributo != "objectClass") {
-                    echo "<option value='$atributo'>" . $atributo . " --> " . $valor[$i] . "</option>";
-                }
-            }
-            $atributo = ldap_next_attribute($conexion, $entrada);
-        }
-        echo "</select>";
-        echo "<br><input type='text' placeholder='Nuevo contenido' id='contenidoAtributo'>";
-        // Liberamos los resultados para recuperar memoria
-        ldap_free_result($resultados);
-        ?>
-    </form>
-    <?php
+function AJAX_crearUID($link_identifier, $path, $uidUser, $uidCommonName, $uidHomeFolder, $uidIDUser, $uidIDGroup, $uidPassword) {
+    escribirLog("Creación de usuario...", "Debug");
+
+    $data["objectClass"][0] = "posixAccount";
+    $data["objectClass"][1] = "shadowAccount";
+    $data["objectClass"][2] = "account";
+    $data["objectClass"][3] = "top";
+    $data["uid"] = $uidUser;
+    $data["cn"] = $uidCommonName;
+    $data["userPassword"] = $uidPassword;
+    $data["gecos"] = $uidCommonName;
+    $data["homeDirectory"] = $uidHomeFolder;
+    $data["uidNumber"] = $uidIDUser;
+    $data["gidNumber"] = $uidIDGroup;
+    $data["loginShell"] = "/bin/bash";
+    $data["shadowExpire"] = -1;
+    $data["shadowLastChange"] = 16431;
+    $data["shadowMax"] = 999999;
+    $data["shadowMin"] = 0;
+    $data["shadowWarning"] = 7;
+
+    $dn = "uid=" . $uidUser . "," . $path;
+    $result = ldap_add($link_identifier, $dn, $data);
+
+    if ($result) {
+        escribirLog("Se ha creado el usuario '$dn' correctamente", "Info");
+    } else {
+        escribirLog("Error al crear el usuario '$dn'"
+                . "\nNúmero error: " . ldap_errno($link_identifier)
+                . "\nError: " . ldap_error($link_identifier), "Error");
+    }
+
+    ldap_free_result($result);
 }
 
+function AJAX_crearCN($link_identifier, $path, $cn) {
+    escribirLog("Creación de un dispositivo...", "Debug");
+    
+    $data["objectClass"][0] = "top";
+    $data["objectClass"][1] = "device";
+    $data["cn"][0] = $cn;
+    
+    $dn = "cn=" . $cn . "," . $path;
+    $result = ldap_add($link_identifier, $dn, $data);
+    if ($result) {
+        escribirLog("Se ha agregado el dispositivo '$dn' correctamente", "Info");
+    } else {
+        escribirLog("Error al agregar el dispositivo '$dn'"
+                . "\nNúmero error: " . ldap_errno($link_identifier)
+                . "\nError: " . ldap_error($link_identifier), "Error");
+    }
+    ldap_free_result($result);
+}
+
+function AJAX_agregarAtributo($link_identifier, $dn, $attribute, $attributeContent) {
+    escribirLog("Petición AJAX (Agregar atributo)", "Debug");
+    $data[$attribute] = $attributeContent;
+    $result = ldap_mod_add($link_identifier, $dn, $data);
+    if ($result) {
+        escribirLog("Se ha agregado el atributo correctamente", "Info");
+    } else {
+        escribirLog("Ocurrió un error al agregar el atributo"
+                . "\nNúmero error: " . ldap_errno($link_identifier)
+                . "\nError: " . ldap_error($link_identifier), "Error");
+//        alert("Algun error en la funcion 'AJAXAgregarAtributo'");
+    }
+    ldap_free_result($result);
+}
+
+// MODIFY
+function AJAX_modificarAtributo($link_identifier, $dn, $attribute, $attributeContent) {
+    escribirLog("Petición AJAX (Modificar atributo)", "Debug");
+    $data[$attribute] = $attributeContent;
+    $result = ldap_mod_replace($link_identifier, $dn, $data);
+    if ($result) {
+        escribirLog("Se ha modificado el atributo correctamente", "Info");
+    } else {
+        escribirLog("Error al modificar el atributo"
+                . "\nNúmero error: " . ldap_errno($link_identifier)
+                . "\nError: " . ldap_error($link_identifier), "Error");
+//        alert("Algun error en la funcion 'AJAXModificarAtributo'");
+    }
+    ldap_free_result($result);
+}
+
+// DELETE
 function AJAX_eliminarEntrada($link_identifier, $dn) {
     escribirLog("Eliminación de la entrada '$dn'", "Debug");
     $entries = ldap_list($link_identifier, $dn, "ObjectClass=*", array(""));
@@ -86,47 +131,36 @@ function AJAX_eliminarEntrada($link_identifier, $dn) {
     return $boolean;
 }
 
-function AJAX_modificarAtributo($conexion, $ruta, $atributo, $contenidoAtributo) {
-    escribirLog("Petición AJAX (Modificar atributo)", "Debug");
-    $datos[$atributo] = $contenidoAtributo;
-    $resultados = ldap_mod_replace($conexion, $ruta, $datos);
-    if ($resultados) {
-        escribirLog("Se ha modificado el atributo correctamente", "Info");
-        // Nothing
-    } else {
-        escribirLog("Error al modificar el atributo"
-                . "\nNúmero error: " . ldap_errno($conexion)
-                . "\nError: " . ldap_error($conexion), "Error");
-        alert("Algun error en la funcion 'AJAXModificarAtributo'");
-    }
-    ldap_free_result($resultados);
-}
 
-function AJAX_formAgregarAtributo() {
-    escribirLog("Petición AJAX (Formulario para agregar atributo)", "Debug");
-    escribirLog("Se ha agregado el formulario correctamente", "Info");
-    ?>
-    <form>
-        <input type='text' placeholder='Atributo' id='atributo'>
-        <input type='text' placeholder='Contenido atributo' id='contenidoAtributo'>
-    </form>
-    <?php
-}
-
-function AJAX_agregarAtributo($link_identifier, $dn, $attribute, $attributeContent) {
-    escribirLog("Petición AJAX (Agregar atributo)", "Debug");
-    $data[$attribute] = $attributeContent;
-    $result = ldap_mod_add($link_identifier, $dn, $data);
-    if ($result) {
-        escribirLog("Se ha agregado el atributo correctamente", "Info");
-    } else {
-        escribirLog("Ocurrió un error al agregar el atributo"
-                . "\nNúmero error: " . ldap_errno($link_identifier)
-                . "\nError: " . ldap_error($link_identifier), "Error");
-        alert("Algun error en la funcion 'AJAXAgregarAtributo'");
+// OTHERS
+function AJAX_informacionEntrada($link_identifier, $dn) {
+    escribirLog("Petición AJAX (Información de entrada)", "Debug");
+    // El filtro es el RDN del DN
+    $filter = before(",", $dn);
+    // La ruta padre es todo lo demas
+    $path = after(",", $dn);
+    // Buscamos en todo el arbol LDAP dicho objeto
+    $result = ldap_search($link_identifier, $path, $filter);
+    // Obtenemos la primera entrada encontrada
+    $entry = ldap_first_entry($link_identifier, $result);
+    // Obtenemos el primer atributo de la primera entrada encontrada
+    $attribute = ldap_first_attribute($link_identifier, $entry);
+    echo "<table class='rejilla'>";
+    // Por cada atributo obtengo el valor y lo escribo
+    while ($attribute) {
+        $values = ldap_get_values($link_identifier, $entry, $attribute);
+        for ($i = 0; $i < $values["count"]; $i++) {
+            echo "<tr><td>" . $attribute . "</td><td>" . $values[$i] . "</td></tr>";
+        }
+        $attribute = ldap_next_attribute($link_identifier, $entry);
     }
+    echo "</table>";
+
+    // Liberamos los resultados para recuperar memoria
     ldap_free_result($result);
 }
+
+
 
 function AJAX_contenidoArbol($link_identifier) {
     escribirLog("Petición AJAX (Contenido árbol LDAP)", "Debug");
@@ -241,80 +275,7 @@ function AJAX_obtenerListaServidores() {
     }
 }
 
-function AJAX_crearOU($link_identifier, $path, $ouName) {
-    escribirLog("Creación de unidad organizativa...", "Debug");
 
-    $data["objectClass"][0] = "top";
-    $data["objectClass"][1] = "organizationalUnit";
-    $data["ou"] = $ouName;
-
-    $dn = "ou=" . $ouName . "," . $path;
-    $result = ldap_add($link_identifier, $dn, $data);
-
-    if ($result) {
-        escribirLog("Se ha creado la unidad organizativa '" . $dn . "' correctamente", "Info");
-    } else {
-        escribirLog("Error al crear la unidad organizativa '" . $dn . "'"
-                . "\nNúmero error: " . ldap_errno($link_identifier)
-                . "\nError: " . ldap_error($link_identifier), "Error");
-    }
-
-    ldap_free_result($result);
-}
-
-function AJAX_crearUID($link_identifier, $path, $uidUser, $uidCommonName, $uidHomeFolder, $uidIDUser, $uidIDGroup, $uidPassword) {
-    escribirLog("Creación de usuario...", "Debug");
-
-    $data["objectClass"][0] = "posixAccount";
-    $data["objectClass"][1] = "shadowAccount";
-    $data["objectClass"][2] = "account";
-    $data["objectClass"][3] = "top";
-    $data["uid"] = $uidUser;
-    $data["cn"] = $uidCommonName;
-    $data["userPassword"] = $uidPassword;
-    $data["gecos"] = $uidCommonName;
-    $data["homeDirectory"] = $uidHomeFolder;
-    $data["uidNumber"] = $uidIDUser;
-    $data["gidNumber"] = $uidIDGroup;
-    $data["loginShell"] = "/bin/bash";
-    $data["shadowExpire"] = -1;
-    $data["shadowLastChange"] = 16431;
-    $data["shadowMax"] = 999999;
-    $data["shadowMin"] = 0;
-    $data["shadowWarning"] = 7;
-
-    $dn = "uid=" . $uidUser . "," . $path;
-    $result = ldap_add($link_identifier, $dn, $data);
-
-    if ($result) {
-        escribirLog("Se ha creado el usuario '$dn' correctamente", "Info");
-    } else {
-        escribirLog("Error al crear el usuario '$dn'"
-                . "\nNúmero error: " . ldap_errno($link_identifier)
-                . "\nError: " . ldap_error($link_identifier), "Error");
-    }
-
-    ldap_free_result($result);
-}
-
-function AJAX_crearCN($link_identifier, $path, $cn) {
-    escribirLog("Creación de un dispositivo...", "Debug");
-    
-    $data["objectClass"][0] = "top";
-    $data["objectClass"][1] = "device";
-    $data["cn"][0] = $cn;
-    
-    $dn = "cn=" . $cn . "," . $path;
-    $result = ldap_add($link_identifier, $dn, $data);
-    if ($result) {
-        escribirLog("Se ha agregado el dispositivo '$dn' correctamente", "Info");
-    } else {
-        escribirLog("Error al agregar el dispositivo '$dn'"
-                . "\nNúmero error: " . ldap_errno($link_identifier)
-                . "\nError: " . ldap_error($link_identifier), "Error");
-    }
-    ldap_free_result($result);
-}
 
 function crearArbol($link_identifier, $path) {
     echo $path . "</br>";
@@ -357,5 +318,53 @@ function AJAX_listar($link_identifier, $path) {
     ldap_free_result($result);
     ?>
     <button class="btn btn-success" id="nuevaEntrada" onclick="nuevaEntrada('<?php echo $path ?>')"><i class="material-icons">add_box</i> Nueva entrada</button>
+    <?php
+}
+
+// FORMS
+function AJAX_formModificarAtributo($conexion, $dn) {
+    escribirLog("Petición AJAX (Formulario para modificar atributo)", "Debug");
+    ?>
+    <form>
+        <?php
+        // El filtro es el RDN del DN
+        $filtro = before(",", $dn);
+        // La ruta padre es todo lo demas
+        $rutaPadre = after(",", $dn);
+        // Buscamos en todo el arbol LDAP dicho objeto
+        $resultados = ldap_search($conexion, $rutaPadre, $filtro);
+        // Obtenemos la primera entrada encontrada
+        $entrada = ldap_first_entry($conexion, $resultados);
+        // Obtenemos el primer atributo de la primera entrada encontrada
+        $atributo = ldap_first_attribute($conexion, $entrada);
+        echo "<select id='selector'>";
+        // Por cada atributo obtengo el valor y lo escribo
+        while ($atributo) {
+            $valor = ldap_get_values($conexion, $entrada, $atributo);
+//            $contador = 0;
+            for ($i = 0; $i < $valor["count"]; $i++) {
+                if ($atributo != "objectClass") {
+                    echo "<option value='$atributo'>" . $atributo . " --> " . $valor[$i] . "</option>";
+                }
+            }
+            $atributo = ldap_next_attribute($conexion, $entrada);
+        }
+        echo "</select>";
+        echo "<br><input type='text' placeholder='Nuevo contenido' id='contenidoAtributo'>";
+        // Liberamos los resultados para recuperar memoria
+        ldap_free_result($resultados);
+        ?>
+    </form>
+    <?php
+}
+
+function AJAX_formAgregarAtributo() {
+    escribirLog("Petición AJAX (Formulario para agregar atributo)", "Debug");
+    escribirLog("Se ha agregado el formulario correctamente", "Info");
+    ?>
+    <form>
+        <input type='text' placeholder='Atributo' id='atributo'>
+        <input type='text' placeholder='Contenido atributo' id='contenidoAtributo'>
+    </form>
     <?php
 }
