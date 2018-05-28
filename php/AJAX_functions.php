@@ -88,7 +88,6 @@ function AJAX_agregarAtributo($link_identifier, $dn, $attribute, $attributeConte
         escribirLog("Ocurrió un error al agregar el atributo"
                 . "\nNúmero error: " . ldap_errno($link_identifier)
                 . "\nError: " . ldap_error($link_identifier), "Error");
-//        alert("Algun error en la funcion 'AJAXAgregarAtributo'");
     }
     ldap_free_result($result);
 }
@@ -104,7 +103,6 @@ function AJAX_modificarAtributo($link_identifier, $dn, $attribute, $attributeCon
         escribirLog("Error al modificar el atributo"
                 . "\nNúmero error: " . ldap_errno($link_identifier)
                 . "\nError: " . ldap_error($link_identifier), "Error");
-//        alert("Algun error en la funcion 'AJAXModificarAtributo'");
     }
     ldap_free_result($result);
 }
@@ -133,15 +131,14 @@ function AJAX_eliminarEntrada($link_identifier, $dn) {
 
 function AJAX_eliminarAtributo($link_identifier, $dn, $attribute) {
     escribirLog("Petición AJAX (Eliminar atributo)", "Debug");
-//    $data[$attribute] = array();
-    $result = ldap_mod_del($link_identifier, $dn, $data[$attribute]);
+    $data[before($attribute)] = after(":", $attribute);
+    $result = ldap_mod_del($link_identifier, $dn, $data);
     if ($result) {
         escribirLog("Se ha eliminado el atributo correctamente", "Info");
     } else {
         escribirLog("Error al eliminar el atributo"
                 . "\nNúmero error: " . ldap_errno($link_identifier)
                 . "\nError: " . ldap_error($link_identifier), "Error");
-//        alert("Algun error en la funcion 'AJAXModificarAtributo'");
     }
     ldap_free_result($result);
 }
@@ -168,7 +165,7 @@ function AJAX_formEliminarAtributo($link_identifier, $dn) {
 //            $contador = 0;
             for ($i = 0; $i < $values["count"]; $i++) {
                 if ($attribute != "objectClass") {
-                    echo "<option value='$attribute'>" . $attribute . " --> " . $values[$i] . "</option>";
+                    echo "<option value='$attribute:$values[$i]]'>" . $attribute . " --> " . $values[$i] . "</option>";
                 }
             }
             $attribute = ldap_next_attribute($link_identifier, $entry);

@@ -683,7 +683,6 @@ function modificarEntradaNuevoAtributo(dn) {
                             dn: dn
                         }
                     }).done(function (response) {
-                        alert(response);
                         peticionAJAXContenido(path(dn));
                         peticionAJAXArbol();
                     }).fail(function () {
@@ -750,7 +749,6 @@ function modificarEntradaModificarAtributo(dn) {
                             dn: dn
                         }
                     }).done(function (response) {
-                        alert(response);
                         peticionAJAXContenido(path(dn));
                         peticionAJAXArbol();
                     }).fail(function () {
@@ -815,7 +813,6 @@ function modificarEntradaEliminarAtributo(dn) {
                             dn: dn
                         }
                     }).done(function (response) {
-                        alert(response);
                         peticionAJAXContenido(path(dn));
                         peticionAJAXArbol();
                     }).fail(function () {
