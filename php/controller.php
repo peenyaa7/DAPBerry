@@ -3,6 +3,7 @@
 session_start();
 include_once './utils.php';
 include_once './AJAX_functions.php';
+include_once './LOG_functions.php';
 
 if (isset($_REQUEST["accion"])) {
     $accion = $_REQUEST["accion"];
@@ -32,12 +33,12 @@ if (isset($_REQUEST["accion"])) {
 //                    break;
                 case "ajaxagregarunidadorganizativa":
                     // add organizational unit
-                    AJAX_crearOU($link_identifier, $_REQUEST["ruta"], $_REQUEST["ouUnidadOrganizativa"]);
+                    AJAX_crearOU($link_identifier, $_REQUEST["path"], $_REQUEST["ouUnidadOrganizativa"]);
 //                    header("Location: main.php?ruta=" . $rutaPadre);
                     break;
                 case "ajaxagregarusuario":
                     // add user
-                    AJAX_crearUID($link_identifier, $_REQUEST["ruta"], $_REQUEST["uidUsuario"], $_REQUEST["uidNombreComun"], $_REQUEST["uidCarpeta"], $_REQUEST["uidIDUsuario"], $_REQUEST["uidIDGrupo"], $_REQUEST["uidPassword"]);
+                    AJAX_crearUID($link_identifier, $_REQUEST["path"], $_REQUEST["uidUsuario"], $_REQUEST["uidNombreComun"], $_REQUEST["uidCarpeta"], $_REQUEST["uidIDUsuario"], $_REQUEST["uidIDGrupo"], $_REQUEST["uidPassword"]);
 //                    header("Location: main.php?ruta=" . $rutaPadre);
                     break;
                 case "ajaxinformacionaplicacion":
@@ -46,16 +47,16 @@ if (isset($_REQUEST["accion"])) {
                     break;
                 case "ajaxagregardispositivo":
                     // add device
-                    AJAX_crearCN($link_identifier, $_REQUEST["ruta"], $_REQUEST["cnNombre"]);
+                    AJAX_crearCN($link_identifier, $_REQUEST["path"], $_REQUEST["cnNombre"]);
 //                    header("Location: main.php?accion=buscar&ruta=" . $rutaPadre);
                     break;
                 case "ajaxformmodificaratributo":
                     // form to modify attribute
-                    AJAX_formModificarAtributo($link_identifier, $_REQUEST["ruta"]);
+                    AJAX_formModificarAtributo($link_identifier, $_REQUEST["dn"]);
                     break;
                 case "ajaxmodificaratributo":
                     // modify attribute
-                    AJAX_modificarAtributo($link_identifier, $_REQUEST["ruta"], $_REQUEST["atributo"], $_REQUEST["contenidoAtributo"]);
+                    AJAX_modificarAtributo($link_identifier, $_REQUEST["dn"], $_REQUEST["attribute"], $_REQUEST["attributeContent"]);
                     break;
                 case "ajaxformagregaratributo":
                     // form to add attribute
@@ -63,7 +64,7 @@ if (isset($_REQUEST["accion"])) {
                     break;
                 case "ajaxagregaratributo":
                     // add attribute
-                    AJAX_agregarAtributo($link_identifier, $_REQUEST["ruta"], $_REQUEST["atributo"], $_REQUEST["contenidoAtributo"]);
+                    AJAX_agregarAtributo($link_identifier, $_REQUEST["dn"], $_REQUEST["atributo"], $_REQUEST["contenidoAtributo"]);
                     break;
                 case "ajaxcontenidoentrada":
                     // tree content
@@ -75,7 +76,7 @@ if (isset($_REQUEST["accion"])) {
                     break;
                 case "ajaxeliminarentrada":
                     // delete entry
-                    AJAX_eliminarEntrada($link_identifier, $_REQUEST["ruta"]);
+                    AJAX_eliminarEntrada($link_identifier, $_REQUEST["dn"]);
                     break;
                 case "obtenerlog":
                     // get LOG

@@ -310,9 +310,9 @@ function nuevaEntrada(rutaPadre) {
 
 
 
-function nuevaEntradaUnidadOrganizativa(rutaPadre) {
+function nuevaEntradaUnidadOrganizativa(path) {
     $.confirm({
-        title: "Crear Unidad Organizativa dentro de <span class='destacarspan'>" + rutaPadre + "</span>",
+        title: "Crear Unidad Organizativa dentro de <span class='destacarspan'>" + path + "</span>",
         theme: 'supervan',
         columClass: "medium",
         content: "" +
@@ -343,10 +343,10 @@ function nuevaEntradaUnidadOrganizativa(rutaPadre) {
                         data: {
                             accion: "ajaxagregarunidadorganizativa",
                             ouUnidadOrganizativa: ouUnidadOrganizativa,
-                            ruta: rutaPadre
+                            path: path
                         }
                     }).done(function () {
-                        peticionAJAXContenido(rutaPadre);
+                        peticionAJAXContenido(path);
                         peticionAJAXArbol();
                     }).fail(function () {
                         window.location = "../php/error.php";
@@ -470,7 +470,7 @@ function nuevaEntradaUsuario(path) {
                             uidIDUsuario: uidIDUsuario,
                             uidIDGrupo: uidIDGrupo,
                             uidPassword: uidPassword,
-                            ruta: path
+                            path: path
                         }
                     }).done(function () {
                         peticionAJAXContenido(path);
@@ -498,9 +498,9 @@ function nuevaEntradaUsuario(path) {
     });
 }
 
-function nuevaEntradaDispositivo(rutaPadre) {
+function nuevaEntradaDispositivo(path) {
     $.confirm({
-        title: "Crear dispositivo dentro de <span class='destacarspan'>" + rutaPadre + "</span>",
+        title: "Crear dispositivo dentro de <span class='destacarspan'>" + path + "</span>",
         theme: 'supervan',
         columClass: "medium",
         content: "" +
@@ -531,10 +531,10 @@ function nuevaEntradaDispositivo(rutaPadre) {
                         data: {
                             accion: "ajaxagregardispositivo",
                             cnNombre: cnNombre,
-                            ruta: rutaPadre
+                            path: path
                         }
                     }).done(function () {
-                        peticionAJAXContenido(rutaPadre);
+                        peticionAJAXContenido(path);
                         peticionAJAXArbol();
                     }).fail(function () {
                         window.location = "../php/error.php";
@@ -606,7 +606,7 @@ function informacionEntrada(button) {
 }
 
 function modificarEntrada(boton) {
-    var dn = boton.parentNode.parentNode.getAttribute("dn");
+    var dn = boton.getAttribute("dn");
     $.confirm({
         title: "Modificar la entrada",
         content: "¿Cómo modificaremos esta entrada?<br><span class='destacarspan'>" + dn + "</span>",
@@ -655,7 +655,6 @@ function modificarEntradaNuevoAtributo(dn) {
                 url: "../php/controller.php",
                 data: {
                     accion: "ajaxformagregaratributo"
-//                    ruta: dn
                 }
             }).done(function (response) {
                 self.setContentAppend(response);
@@ -681,7 +680,7 @@ function modificarEntradaNuevoAtributo(dn) {
                             accion: "ajaxagregaratributo",
                             atributo: atributo,
                             contenidoAtributo: contenidoAtributo,
-                            ruta: dn
+                            dn: dn
                         }
                     }).done(function (response) {
                         alert(response);
@@ -723,7 +722,7 @@ function modificarEntradaModificarAtributo(dn) {
                 url: "../php/controller.php",
                 data: {
                     accion: "ajaxformmodificaratributo",
-                    ruta: dn
+                    dn: dn
                 }
             }).done(function (response) {
                 self.setContentAppend(response);
@@ -736,9 +735,9 @@ function modificarEntradaModificarAtributo(dn) {
                 text: 'Modificar atributo!',
                 btnClass: 'btn-blue',
                 action: function () {
-                    var contenidoAtributo = this.$content.find('#contenidoAtributo').val();
-                    var atributo = this.$content.find("#selector").val();
-                    if (!contenidoAtributo) {
+                    var attributeContent = this.$content.find('#contenidoAtributo').val();
+                    var attribute = this.$content.find("#selector").val();
+                    if (!attributeContent) {
                         $.alert('Establece un contenido');
                         return false;
                     }
@@ -747,9 +746,9 @@ function modificarEntradaModificarAtributo(dn) {
                         url: "../php/controller.php",
                         data: {
                             accion: "ajaxmodificaratributo",
-                            atributo: atributo,
-                            contenidoAtributo: contenidoAtributo,
-                            ruta: dn
+                            attribute: attribute,
+                            attributeContent: attributeContent,
+                            dn: dn
                         }
                     }).done(function (response) {
                         alert(response);
@@ -803,7 +802,7 @@ function eliminarEntrada(button) {
                         url: "../php/controller.php",
                         data: {
                             accion: "ajaxeliminarentrada",
-                            ruta: dn
+                            dn: dn
                         }
                     }).done(function () {
                         var dnPadre = dn.substr(dn.indexOf(",") + 1);
