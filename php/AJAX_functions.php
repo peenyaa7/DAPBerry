@@ -130,8 +130,8 @@ function AJAX_eliminarEntrada($link_identifier, $dn) {
 }
 
 function AJAX_eliminarAtributo($link_identifier, $dn, $attribute) {
-    escribirLog("Petición AJAX (Eliminar atributo)", "Debug");
-    $data[before($attribute)] = after(":", $attribute);
+    escribirLog("Petición AJAX (Eliminar atributo '" . before(":", $attribute) . "' con contenido '" . after(":", $attribute) . "' de la entrada '$dn')", "Debug");
+    $data[before(":",$attribute)] = after(":", $attribute);
     $result = ldap_mod_del($link_identifier, $dn, $data);
     if ($result) {
         escribirLog("Se ha eliminado el atributo correctamente", "Info");
@@ -165,7 +165,7 @@ function AJAX_formEliminarAtributo($link_identifier, $dn) {
 //            $contador = 0;
             for ($i = 0; $i < $values["count"]; $i++) {
                 if ($attribute != "objectClass") {
-                    echo "<option value='$attribute:$values[$i]]'>" . $attribute . " --> " . $values[$i] . "</option>";
+                    echo "<option value='$attribute:$values[$i]'>" . $attribute . " --> " . $values[$i] . "</option>";
                 }
             }
             $attribute = ldap_next_attribute($link_identifier, $entry);

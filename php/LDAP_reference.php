@@ -29,6 +29,7 @@ and open the template in the editor.
             <li><a href="#leyenda">Leyenda</a></li>
             <li><a href="#atributos">Atributos</a></li>
             <li><a href="#clasesobjetos">Clases de objetos</a></li>
+            <li><a href="#errorcodes">Códigos de error</a></li>
         </ol>
         <h2 id="leyenda">Leyenda</h2>
         <table border="1" cellspacing="0" cellpadding="0">
@@ -55,7 +56,7 @@ and open the template in the editor.
     <td>Suprimido de la definición del RFC</td>
 </tr>
 </table>
-        <h2 id="atributos">Atributos</h2>
+<h2 id="atributos">Atributos</h2>
 <table border="1" cellspacing="0" cellpadding="2">
     <tr> 
         <th>Atributo</th>
@@ -775,7 +776,7 @@ and open the template in the editor.
             data.</td>
     </tr>
 </table>
-        <h2 id="clasesobjetos">Clases de objetos</h2>
+<h2 id="clasesobjetos">Clases de objetos</h2>
 <table border="1" cellspacing="0" cellpadding="2">
     <tr> 
         <th>Clase de objeto</th>
@@ -1605,6 +1606,455 @@ and open the template in the editor.
         <td>The inetOrgPerson represents people who are associated with an organization 
             in some way. It is a structural class and is derived from the organizationalPerson 
             class which is defined in X.521.</td>
+    </tr>
+</table>
+<h2 id="errorcodes">Códigos de error</h2>
+<table border="1" cellspacing="0" cellpadding="2">
+    <tr> 
+        <th>Error / Código de error</th>
+        <th>Texto</th>
+        <th>Descripción</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>LDAP_SUCCESS</td>
+        <td>Indicates the requested client operation completed successfully.</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>LDAP_PROTOCOL_ERROR</td>
+        <td>Indicates that the server has received an invalid or malformed request from
+            the client.</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>LDAP_TIMELIMIT_EXCEEDED</td>
+        <td>Indicates that the operation&#39;s time limit specified by either the client or
+            the server has been exceeded. On search operations, incomplete results are
+            returned.</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>LDAP_SIZELIMIT_EXCEEDED</td>
+        <td>Indicates that in a search operation, the size limit specified by the client
+            or the server has been exceeded. Incomplete results are returned.</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>LDAP_COMPARE_FALSE</td>
+        <td>Does not indicate an error condition. Indicates that the results of a compare
+            operation are false.</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>LDAP_COMPARE_TRUE</td>
+        <td>Does not indicate an error condition. Indicates that the results of a compare
+            operation are true.</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>LDAP_AUTH_METHOD_NOT_SUPPORTED</td>
+        <td>Indicates that during a bind operation the client requested an authentication
+            method not supported by the LDAP server.</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>LDAP_STRONG_AUTH_REQUIRED</td>
+        <td>Indicates one of the following: In bind requests, the LDAP server accepts
+            only strong authentication. In a client request, the client requested an operation
+            such as delete that requires strong authentication. In an unsolicited notice of
+            disconnection, the LDAP server discovers the security protecting the communication
+            between the client and server has unexpectedly failed or been compromised.</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td></td>
+        <td>Reserved.</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>LDAP_REFERRAL</td>
+        <td>Does not indicate an error condition. In LDAPv3, indicates that the server
+            does not hold the target entry of the request, but that the servers in the
+            referral field may.</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>LDAP_ADMINLIMIT_EXCEEDED</td>
+        <td>Indicates that an LDAP server limit set by an administrative authority has
+            been exceeded.</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>LDAP_UNAVAILABLE_CRITICAL_EXTENSION</td>
+        <td>Indicates that the LDAP server was unable to satisfy a request because one or
+            more critical extensions were not available. Either the server does not support
+            the control or the control is not appropriate for the operation type.</td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td>LDAP_CONFIDENTIALITY_REQUIRED</td>
+        <td>Indicates that the session is not protected by a protocol such as Transport
+            Layer Security (TLS), which provides session confidentiality.</td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td>LDAP_SASL_BIND_IN_PROGRESS</td>
+        <td>Does not indicate an error condition, but indicates that the server is ready
+            for the next step in the process. The client must send the server the same SASL
+            mechanism to continue the process.</td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td></td>
+        <td>Not used.</td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td>LDAP_NO_SUCH_ATTRIBUTE</td>
+        <td>Indicates that the attribute specified in the modify or compare operation
+            does not exist in the entry.</td>
+    </tr>
+    <tr>
+        <td>17</td>
+        <td>LDAP_UNDEFINED_TYPE</td>
+        <td>Indicates that the attribute specified in the modify or add operation does
+            not exist in the LDAP server&#39;s schema.</td>
+    </tr>
+    <tr>
+        <td>18</td>
+        <td>LDAP_INAPPROPRIATE_MATCHING</td>
+        <td>Indicates that the matching rule specified in the search filter does not
+            match a rule defined for the attribute&#39;s syntax.</td>
+    </tr>
+    <tr>
+        <td>19</td>
+        <td>LDAP_CONSTRAINT_VIOLATION</td>
+        <td>Indicates that the attribute value specified in a modify, add, or modify DN
+            operation violates constraints placed on the attribute. The constraint can be one
+            of size or content (string only, no binary).</td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td>LDAP_TYPE_OR_VALUE_EXISTS</td>
+        <td>Indicates that the attribute value specified in a modify or add operation
+            already exists as a value for that attribute.</td>
+    </tr>
+    <tr>
+        <td>21</td>
+        <td>LDAP_INVALID_SYNTAX</td>
+        <td>Indicates that the attribute value specified in an add, compare, or modify
+            operation is an unrecognized or invalid syntax for the attribute.</td>
+    </tr>
+    <tr>
+        <td>22-31</td>
+        <td></td>
+        <td>Not used.</td>
+    </tr>
+    <tr>
+        <td>32</td>
+        <td>LDAP_NO_SUCH_OBJECT</td>
+        <td>Indicates the target object cannot be found. This code is not returned on
+            following operations: Search operations that find the search base but cannot find
+            any entries that match the search filter. Bind operations.</td>
+    </tr>
+    <tr>
+        <td>33</td>
+        <td>LDAP_ALIAS_PROBLEM</td>
+        <td>Indicates that an error occurred when an alias was dereferenced.</td>
+    </tr>
+    <tr>
+        <td>34</td>
+        <td>LDAP_INVALID_DN_SYNTAX</td>
+        <td>Indicates that the syntax of the DN is incorrect. (If the DN syntax is
+            correct, but the LDAP server&#39;s structure rules do not permit the operation, the
+            server returns code 53:  LDAP_UNWILLING_TO_PERFORM.)</td>
+    </tr>
+    <tr>
+        <td>35</td>
+        <td>LDAP_IS_LEAF</td>
+        <td>Indicates that the specified operation cannot be performed on a leaf entry.
+            (This code is not currently in the LDAP specifications, but is reserved for this
+            constant.)</td>
+    </tr>
+    <tr>
+        <td>36</td>
+        <td>LDAP_ALIAS_DEREF_PROBLEM</td>
+        <td>Indicates that during a search operation, either the client does not have
+            access rights to read the aliased object&#39;s name or dereferencing is not
+            allowed.</td>
+    </tr>
+    <tr>
+        <td>37-47</td>
+        <td></td>
+        <td>Not used.</td>
+    </tr>
+    <tr>
+        <td>48</td>
+        <td>LDAP_INAPPROPRIATE_AUTH</td>
+        <td>Indicates that during a bind operation, the client is attempting to use an
+            authentication method that the client cannot use correctly. For example, either of
+            the following cause this error: The client returns simple credentials when strong
+            credentials are required...OR...The client returns a DN and a password for a
+            simple bind when the entry does not have a password defined.</td>
+    </tr>
+    <tr>
+        <td>49  </td>
+        <td>LDAP_INVALID_CREDENTIALS</td>
+        <td>Indicates that during a bind operation one of the following occurred: The
+            client passed either an incorrect DN or password, or the password is incorrect
+            because it has expired, intruder detection has locked the account, or another
+            similar reason. See the data code for more information.</td>
+    </tr>
+    <tr>
+        <td>49 / 52e</td>
+        <td>AD_INVALID CREDENTIALS</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext error, which is
+            returned when the username is valid but the combination of password and user
+            credential is invalid. This is the AD equivalent of LDAP error code 49.</td>
+    </tr>
+    <tr>
+        <td>49 / 525</td>
+        <td>USER NOT FOUND</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext data error that is
+            returned when the username is invalid.</td>
+    </tr>
+    <tr>
+        <td>49 / 530</td>
+        <td>NOT_PERMITTED_TO_LOGON_AT_THIS_TIME</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext data error that is
+            logon failure caused because the user is not permitted to log on at this time.
+            Returns only when presented with a valid username and valid password
+            credential.</td>
+    </tr>
+    <tr>
+        <td>49 / 531</td>
+        <td>RESTRICTED_TO_SPECIFIC_MACHINES</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext data error that is
+            logon failure caused because the user is not permitted to log on from this
+            computer. Returns only when presented with a valid username and valid password
+            credential.</td>
+    </tr>
+    <tr>
+        <td>49 / 532</td>
+        <td>PASSWORD_EXPIRED</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext data error that is a
+            logon failure. The specified account password has expired. Returns only when
+            presented with valid username and password credential.</td>
+    </tr>
+    <tr>
+        <td>49 / 533</td>
+        <td>ACCOUNT_DISABLED</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext data error that is a
+            logon failure. The account is currently disabled. Returns only when presented with
+            valid username and password credential.</td>
+    </tr>
+    <tr>
+        <td>49 / 568</td>
+        <td>ERROR_TOO_MANY_CONTEXT_IDS</td>
+        <td>Indicates that during a log-on attempt, the user&#39;s security context
+            accumulated too many security IDs. This is an issue with the specific LDAP user
+            object/account which should be investigated by the LDAP administrator. </td>
+    </tr>
+    <tr>
+        <td>49 / 701</td>
+        <td>ACCOUNT_EXPIRED</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext data error that is a
+            logon failure. The user&#39;s account has expired. Returns only when presented with
+            valid username and password credential.</td>
+    </tr>
+    <tr>
+        <td>49 / 773</td>
+        <td>USER MUST RESET PASSWORD</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext data error. The
+            user&#39;s password must be changed before logging on the first time. Returns only
+            when presented with valid user-name and password credential.</td>
+    </tr>
+    <tr>
+        <td>50</td>
+        <td>LDAP_INSUFFICIENT_ACCESS</td>
+        <td>Indicates that the caller does not have sufficient rights to perform the
+            requested operation.</td>
+    </tr>
+    <tr>
+        <td>51</td>
+        <td>LDAP_BUSY</td>
+        <td>Indicates that the LDAP server is too busy to process the client request at
+            this time but if the client waits and resubmits the request, the server may be
+            able to process it then.</td>
+    </tr>
+    <tr>
+        <td>52</td>
+        <td>LDAP_UNAVAILABLE</td>
+        <td>Indicates that the LDAP server cannot process the client&#39;s bind request,
+            usually because it is shutting down.</td>
+    </tr>
+    <tr>
+        <td>52e</td>
+        <td>AD_INVALID CREDENTIALS</td>
+        <td>Indicates an Active Directory (AD) AcceptSecurityContext error, which is
+            returned when the username is valid but the combination of password and user
+            credential is invalid. This is the AD equivalent of LDAP error code 49:
+            LDAP_INVALID_CREDENTIALS.</td>
+    </tr>
+    <tr>
+        <td>53</td>
+        <td>LDAP_UNWILLING_TO_PERFORM</td>
+        <td>Indicates that the LDAP server cannot process the request because of
+            server-defined restrictions. This error is returned for the following reasons: The
+            add entry request violates the server&#39;s structure rules...OR...The modify
+            attribute request specifies attributes that users cannot modify...OR...Password
+            restrictions prevent the action...OR...Connection restrictions prevent the
+            action.</td>
+    </tr>
+    <tr>
+        <td>54</td>
+        <td>LDAP_LOOP_DETECT</td>
+        <td>Indicates that the client discovered an alias or referral loop, and is thus
+            unable to complete this request.</td>
+    </tr>
+    <tr>
+        <td>55-63</td>
+        <td></td>
+        <td>Not used.</td>
+    </tr>
+    <tr>
+        <td>64</td>
+        <td>LDAP_NAMING_VIOLATION</td>
+        <td>Indicates that the add or modify DN operation violates the schema&#39;s structure
+            rules. For example, The request places the entry subordinate to an alias. The
+            request places the entry subordinate to a container that is forbidden by the
+            containment rules. The RDN for the entry uses a forbidden attribute type.</td>
+    </tr>
+    <tr>
+        <td>65</td>
+        <td>LDAP_OBJECT_CLASS_VIOLATION</td>
+        <td>Indicates that the add, modify, or modify DN operation violates the object
+            class rules for the entry. For example, the following types of request return this
+            error: The add or modify operation tries to add an entry without a value for a
+            required attribute. The add or modify operation tries to add an entry with a value
+            for an attribute which the class definition does not contain. The modify operation
+            tries to remove a required attribute without removing the auxiliary class that
+            defines the attribute as required.</td>
+    </tr>
+    <tr>
+        <td>66</td>
+        <td>LDAP_NOT_ALLOWED_ON_NONLEAF</td>
+        <td>Indicates that the requested operation is permitted only on leaf entries. For
+            example, the following types of requests return this error: The client requests a
+            delete operation on a parent entry. The client request a modify DN operation on a
+            parent entry.</td>
+    </tr>
+    <tr>
+        <td>67</td>
+        <td>LDAP_NOT_ALLOWED_ON_RDN</td>
+        <td>Indicates that the modify operation attempted to remove an attribute value
+            that forms the entry&#39;s relative distinguished name.</td>
+    </tr>
+    <tr>
+        <td>68</td>
+        <td>LDAP_ALREADY_EXISTS</td>
+        <td>Indicates that the add operation attempted to add an entry that already
+            exists, or that the modify operation attempted to rename an entry to the name of
+            an entry that already exists.</td>
+    </tr>
+    <tr>
+        <td>69</td>
+        <td>LDAP_NO_OBJECT_CLASS_MODS</td>
+        <td>Indicates that the modify operation attempted to modify the structure rules
+            of an object class.</td>
+    </tr>
+    <tr>
+        <td>70</td>
+        <td>LDAP_RESULTS_TOO_LARGE</td>
+        <td>Reserved for CLDAP.</td>
+    </tr>
+    <tr>
+        <td>71</td>
+        <td>LDAP_AFFECTS_MULTIPLE_DSAS</td>
+        <td>Indicates that the modify DN operation moves the entry from one LDAP server
+            to another and requires more than one LDAP server.</td>
+    </tr>
+    <tr>
+        <td>72-79</td>
+        <td></td>
+        <td>Not used.</td>
+    </tr>
+    <tr>
+        <td>80</td>
+        <td>LDAP_OTHER</td>
+        <td>Indicates an unknown error condition. This is the default value for NDS error
+            codes which do not map to other LDAP error codes.</td>
+    </tr>
+    <tr>
+        <td>10000</td>
+        <td>LDAP_ERROR_GENEREL</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10001</td>
+        <td>LDAP_ERROR_MAL_FORMED_URL</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10002</td>
+        <td>LDAP_ERROR_UNAUTHENTICATED_BIND</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10300</td>
+        <td>LDAP_ERROR_COMMUNICATION_EXCEPTION</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10301</td>
+        <td>LDAP_ERROR_SOCKET_TIMEOUT</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10302</td>
+        <td>LDAP_ERROR_CONNECTION_REFUSED</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10303</td>
+        <td>LDAP_ERROR_CONNECTION_RESET</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10304</td>
+        <td>LDAP_ERROR_NO_ROUTE</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10305</td>
+        <td>LDAP_ERROR_UNKNOW_HOST</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10400</td>
+        <td>LDAP_ERROR_SSL_EXCEPTION</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10401</td>
+        <td>LDAP_ERROR_SSL_EMPTY_CERT_STORE</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10402</td>
+        <td>LDAP_ERROR_SSL_CERT_NOT_FOUND</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10403</td>
+        <td>LDAP_ERROR_SSL_CERT_EXPIRED</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>10500</td>
+        <td>LDAP_ERROR_INVALID_SEARCH_FILTER_EXCEPTION</td>
+        <td>&nbsp;</td>
     </tr>
 </table>
 </body>
