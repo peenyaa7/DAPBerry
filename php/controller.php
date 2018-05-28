@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include_once './utilities.php';
+include_once './utils.php';
 include_once './AJAX_functions.php';
 
 if (isset($_REQUEST["accion"])) {

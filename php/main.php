@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include_once ',/utilities.php';
-include_once './utils_functions.php';
+include_once './utils.php';
 ?>
 <html>
     <head>
