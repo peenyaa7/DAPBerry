@@ -1,6 +1,6 @@
 <?php
 
-function despues($substr, $str) {
+function after($substr, $str) {
     if (!is_bool(strpos($str, $substr))) {
         return substr($str, strpos($str, $substr) + strlen($substr));
     }
@@ -11,7 +11,7 @@ function before($substr, $str) {
 }
 
 function between($firstsubstr, $secondsubstr, $str) {
-    return before($secondsubstr, despues($firstsubstr, $str));
+    return before($secondsubstr, after($firstsubstr, $str));
 }
 
 function extraerCN($usuario) {
