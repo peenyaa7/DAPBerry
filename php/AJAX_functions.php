@@ -284,7 +284,7 @@ function crearArbol($link_identifier, $path) {
 
 function AJAX_listar($link_identifier, $path) {
     ?>
-    <h1><?php echo $_REQUEST["ruta"] ?></h1>
+    <h1><?php echo $path ?></h1>
     <?php
     $filter = "(|(uid=*)(cn=*)(ou=*)(objectClass=*)(uniquemember=*)(o=*))";
     $result = ldap_list($link_identifier, $path, $filter);
@@ -300,12 +300,12 @@ function AJAX_listar($link_identifier, $path) {
             </thead>
             <tbody><?php for ($i = 0; $i < $entries["count"]; $i++) {
             ?>
-                    <tr dn="<?php echo $entries[$i]["dn"] ?>">
+                    <tr>
                         <td><?php echo $entries[$i]["dn"] ?></td>
                         <td>
-                            <i class="material-icons button info" id="infoEntrada" onclick="informacionEntrada(this)">info</i>
-                            <i class="material-icons button edit" id="editarEntrada" onclick="modificarEntrada(this)">edit</i>
-                            <i class="material-icons button delete" id="eliminarEntrada" onclick="eliminarEntrada(this)">delete</i>
+                            <i class="material-icons button info" id="infoEntrada" onclick="informacionEntrada(this)" dn="<?php echo $entries[$i]["dn"] ?>">info</i>
+                            <i class="material-icons button edit" id="editarEntrada" onclick="modificarEntrada(this)" dn="<?php echo $entries[$i]["dn"] ?>">edit</i>
+                            <i class="material-icons button delete" id="eliminarEntrada" onclick="eliminarEntrada(this)" dn="<?php echo $entries[$i]["dn"] ?>">delete</i>
                         </td>
                     </tr><?php } ?>
             </tbody>
@@ -322,37 +322,37 @@ function AJAX_listar($link_identifier, $path) {
 }
 
 // FORMS
-function AJAX_formModificarAtributo($conexion, $dn) {
+function AJAX_formModificarAtributo($link_identifier, $dn) {
     escribirLog("Petición AJAX (Formulario para modificar atributo)", "Debug");
     ?>
     <form>
         <?php
         // El filtro es el RDN del DN
-        $filtro = before(",", $dn);
+        $filter = before(",", $dn);
         // La ruta padre es todo lo demas
-        $rutaPadre = after(",", $dn);
+        $path = after(",", $dn);
         // Buscamos en todo el arbol LDAP dicho objeto
-        $resultados = ldap_search($conexion, $rutaPadre, $filtro);
+        $result = ldap_search($link_identifier, $path, $filter);
         // Obtenemos la primera entrada encontrada
-        $entrada = ldap_first_entry($conexion, $resultados);
+        $entry = ldap_first_entry($link_identifier, $result);
         // Obtenemos el primer atributo de la primera entrada encontrada
-        $atributo = ldap_first_attribute($conexion, $entrada);
+        $attribute = ldap_first_attribute($link_identifier, $entry);
         echo "<select id='selector'>";
         // Por cada atributo obtengo el valor y lo escribo
-        while ($atributo) {
-            $valor = ldap_get_values($conexion, $entrada, $atributo);
+        while ($attribute) {
+            $values = ldap_get_values($link_identifier, $entry, $attribute);
 //            $contador = 0;
-            for ($i = 0; $i < $valor["count"]; $i++) {
-                if ($atributo != "objectClass") {
-                    echo "<option value='$atributo'>" . $atributo . " --> " . $valor[$i] . "</option>";
+            for ($i = 0; $i < $values["count"]; $i++) {
+                if ($attribute != "objectClass") {
+                    echo "<option value='$attribute'>" . $attribute . " --> " . $values[$i] . "</option>";
                 }
             }
-            $atributo = ldap_next_attribute($conexion, $entrada);
+            $attribute = ldap_next_attribute($link_identifier, $entry);
         }
         echo "</select>";
         echo "<br><input type='text' placeholder='Nuevo contenido' id='contenidoAtributo'>";
         // Liberamos los resultados para recuperar memoria
-        ldap_free_result($resultados);
+        ldap_free_result($result);
         ?>
     </form>
     <?php

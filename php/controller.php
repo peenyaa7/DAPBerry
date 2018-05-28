@@ -71,7 +71,7 @@ if (isset($_REQUEST["accion"])) {
                     break;
                 case "ajaxinformacionentrada":
                     // entry information 
-                    AJAX_informacionEntrada($link_identifier, $_REQUEST["ruta"]);
+                    AJAX_informacionEntrada($link_identifier, $_REQUEST["dn"]);
                     break;
                 case "ajaxeliminarentrada":
                     // delete entry

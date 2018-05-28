@@ -319,7 +319,7 @@ function nuevaEntradaUnidadOrganizativa(rutaPadre) {
                 '<p>Una Unidad Organizativa es un contenedor de objetos que permite organizarlos en subconjuntos,' +
                 'dentro del dominio, siguiendo una jerarquía. De este modo, podremos establecer una estructura' +
                 'lógica que represente de forma adecuada nuestra organización y simplifique la administración.<p>' +
-                '<form action="controller.php" method="GET">' +
+                '<form action="controller.php" method="POST">' +
                 '<table class="formAgregar">' +
                 '<tr>' +
                 '<td><label class="obligatorio">Nombre:</label></td>' +
@@ -383,7 +383,7 @@ function nuevaEntradaUsuario(path) {
                 'adquiere una computadora o dispositivo electrónico y que lo emplea para comunicarse' +
                 'con otros usuarios, generar contenido y documentos, utilizar software de diverso' +
                 'tipo y muchas otras acciones posibles.<p>' +
-                '<form action="controller.php" method="GET">' +
+                '<form action="controller.php" method="POST">' +
                 '<table class="formAgregar">' +
                 '<tr>' +
                 '<td><label class="obligatorio">Nombre de usuario (uid):</label></td>' +
@@ -507,7 +507,7 @@ function nuevaEntradaDispositivo(rutaPadre) {
                 '<p>Una Unidad Organizativa es un contenedor de objetos que permite organizarlos en subconjuntos,' +
                 'dentro del dominio, siguiendo una jerarquía. De este modo, podremos establecer una estructura' +
                 'lógica que represente de forma adecuada nuestra organización y simplifique la administración.<p>' +
-                '<form action="controller.php" method="GET">' +
+                '<form action="controller.php" method="POST">' +
                 '<table class="formAgregar">' +
                 '<tr>' +
                 '<td><label class="obligatorio">Nombre:</label></td>' +
@@ -583,7 +583,7 @@ function nuevaEntradaDispositivo(rutaPadre) {
 //}
 
 function informacionEntrada(button) {
-    var dn = button.parentNode.parentNode.getAttribute("dn");
+    var dn = button.getAttribute("dn");
     $.dialog({
         title: 'Información de la entrada',
         content: function () {
@@ -593,7 +593,7 @@ function informacionEntrada(button) {
                 url: "../php/controller.php",
                 data: {
                     accion: "ajaxinformacionentrada",
-                    ruta: dn
+                    dn: dn
                 }
             }).done(function (response) {
                 self.setContentAppend(response);
