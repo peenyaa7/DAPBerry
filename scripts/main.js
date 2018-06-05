@@ -126,7 +126,7 @@ function dialogoManual() {
             manualapp: {
                 text: "Manual DAPBerry",
                 action: function () {
-                    window.open("../trash/documentodeprueba.pdf");
+                    window.open("../docs/DAPBerry_Manual_Usuario_A4.pdf");
                 }
             },
             verlog: {
