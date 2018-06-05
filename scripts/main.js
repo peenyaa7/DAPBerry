@@ -647,7 +647,7 @@ function modificarEntradaNuevoAtributo(dn) {
     $.confirm({
         title: "Agregar un atributo en <span class='destacarspan'>" + dn + "</span>",
         theme: 'supervan',
-//        columClass: "xlarge",
+        columnClass: "xlarge",
         content: function () {
             var self = this;
             return $.ajax({
@@ -712,7 +712,7 @@ function modificarEntradaModificarAtributo(dn) {
     $.confirm({
         title: "Modificar un atributo de <span class='destacarspan'>" + dn + "</span>",
         theme: 'supervan',
-//        columClass: "xlarge",
+        columnClass: "xlarge",
         content: function () {
             var self = this;
             return $.ajax({
@@ -778,7 +778,7 @@ function modificarEntradaEliminarAtributo(dn) {
     $.confirm({
         title: "Eliminar un atributo de <span class='destacarspan'>" + dn + "</span>",
         theme: 'supervan',
-//        columClass: "xlarge",
+        columnClass: "xlarge",
         content: function () {
             var self = this;
             return $.ajax({

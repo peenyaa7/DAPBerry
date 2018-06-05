@@ -119,7 +119,6 @@ button#nuevaEntrada {
     margin: 1% 0%;
 }
 
-/*asdfasdf*/
 #informacionentrada {
     height: 100%;
     width: 100%;
@@ -135,4 +134,11 @@ button#nuevaEntrada {
 #refreshTerminal {
     display: none;
 }
-/*asdfasdf*/
+
+div#terminal {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: white;
+    text-align: center;
+}

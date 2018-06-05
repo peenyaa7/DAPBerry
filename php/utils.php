@@ -1,21 +1,22 @@
 <?php
 
 /*
-  ldap_connect()    // establecer la conexión con el servidor
-  |
-  ldap_bind()       // login anónimo o autentificado
-  |
-  Hacer búsquedas o actualizaciones en el directorio
-  y mostrar los resultados
-  |
-  ldap_close()      // Cerrar la conexión
+ * ldap_connect()      --> Establish the conection with the server
+ *   |
+ * ldap_bind()         --> Anonymous login or authenticated login
+ *   |
+ * Searchs, updates and others operations
+ *   |
+ * ldap_close()        --> Close the conection
+ * 
  */
 
+// Función que realizar la conexión y la autenticación con el servidor
 function conectar() {
     escribirLog("Petición para conexión al servidor LDAP", "Debug");
     $server = $_SESSION["servidor"];
     $link_identifier = ldap_connect($server) or die("No se puede conectar al servidor LDAP.");
-    ldap_set_option($link_identifier, LDAP_OPT_PROTOCOL_VERSION, 3); // Esto soluciona el error del protocolo
+    ldap_set_option($link_identifier, LDAP_OPT_PROTOCOL_VERSION, 3); // Esta línea soluciona el error del protocolo
     if ($link_identifier) {
         escribirLog("Conexión con el servidor LDAP realizada correctamente", "Info");
         $dn = $_SESSION["cn"] . "," . $_SESSION["basedn"];
@@ -39,7 +40,7 @@ function conectar() {
 }
 
 
-
+// Función que lista las entradas de un DN a un solo nivel
 function agregarEntradasUnNivel($link_identifier, $path) {
     $filter = "(|(uid=*)(cn=*)(ou=*)(objectClass=*)(uniquemember=*)(o=*))";
     $result = ldap_list($link_identifier, $path, $filter); //, [], 0, 1000);
@@ -72,20 +73,24 @@ function agregarEntradasUnNivel($link_identifier, $path) {
     }
 }
 
+// Función que retorna lo posterior al parámetro pasado
 function after($substr, $str) {
     if (!is_bool(strpos($str, $substr))) {
         return substr($str, strpos($str, $substr) + strlen($substr));
     }
 }
 
+// Función que retorna lo anterior al parámetro pasado
 function before($substr, $str) {
     return substr($str, 0, strpos($str, $substr));
 }
 
+// Función que retorna lo comprendido entre ambos parámetros
 function between($firstsubstr, $secondsubstr, $str) {
     return before($secondsubstr, after($firstsubstr, $str));
 }
 
+// Función que transforma "admin.group" en "cn=admin,ou=group" (transforma todo lo anterior a '@')
 function extraerCN($usuario) {
     $array = explode(".", $usuario);
     if (count($array) > 1) {
@@ -99,11 +104,8 @@ function extraerCN($usuario) {
     return $usuarioFinal;
 }
 
+// Función que transforma 'example.com' en 'dc=example,dc=com' (transforma todo lo posterio a '@')
 function extraerBaseDN($dominioCompleto) {
-//        $numeroDominios = substr_count($dominioCompleto, ".");
-//        echo "Nombre del usuario: " . $usuario . "<br>";
-//        echo "Base DN: " . $dominioCompleto . "<br>";
-//        echo "El numero de dominios es: " . $numeroDominios . "<br>";
     $todosLosDominios = explode(".", $dominioCompleto);
     $baseDN = "";
     for ($i = 0; $i < count($todosLosDominios); $i++) {
